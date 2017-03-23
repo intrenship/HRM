@@ -26,6 +26,7 @@ Route::group(['middleware' => ['web','auth']], function(){
 	Route::post('/store', 'adminController@insert_news');
 	Route::post('/users_insert', 'adminController@register1');
 	Route::get('/view_news', 'adminController@views_news');
+	Route::get('/view_users', 'adminController@views_users');
 	Route::get('/edit_news/{id}', 'adminController@edit_news');
 	Route::get('/delete/{id}', 'adminController@destroy');
 	Route::post('/update_news/{id}', 'adminController@update_news');

@@ -1,14 +1,7 @@
 @extends('layouts1.app')
 
 @section('main-content')
-	<style type="text/css">
-
-.textarea-none-resize{
- width: 1000px;
- height: 180px;
- resize: none;
-}
-</style>
+	
 	<section class="content">
       <div class="row">
         <div class="col-md-12">
@@ -33,6 +26,7 @@
                   <th>User ID</th>
                   <th>Name</th>
                   <th>Email</th>
+                  <th>Group</th>
                   <th>Action</th>
                 </tr>
                 </thead>
@@ -40,10 +34,11 @@
 
                 <tbody>
                 <tr>
-                  <td>{{ $data->id_berita }}</td>
-                  <td>{{ $data->judul }}
+                  <td>{{ $data->id }}</td>
+                  <td>{{ $data->name }}
                   </td>
-                  <td>   <img src="{{ asset('image/'.$data->gambar)  }}" style="max-height:200px;max-width:200px;margin-top:10px;"><br />{{ $data->berita }}</td>
+                  <td>  {{ $data->email }}</td>
+                  <td>  {{ $data->id_group }}</td>
                  <td><a href="{{ url('edit_news', $data->id) }}"><button type="button" class="btn btn-block btn-warning">Edit <i class="fa fa-edit"></i></button></a> <a href="{{ url('delete', $data->id) }}"><button type="button" class="btn btn-block btn-danger">Delete <i class="fa fa-fw fa-close"></i></button></a></td>
                 </tr>
                 </tbody>
@@ -51,9 +46,11 @@
 
                 <tfoot>
                 <tr>
-                  <th>News ID</th>
-                  <th>Headline</th>
-                  <th>Content</th>
+                 <th>User ID</th>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Group</th>
+                  <th>Action</th>
                 </tr>
                 </tfoot>
               </table>

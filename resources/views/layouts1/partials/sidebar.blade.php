@@ -43,7 +43,7 @@
                 <a href="#"><i class='fa fa-users text-aqua'></i> <span>User</span> <i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
                     <li><a href="{{ url('add_users') }}">Create User</a></li>
-                    <li><a href="#">View User</a></li>
+                    <li><a href="{{ url('view_users') }}">View User</a></li>
 
 					</ul>
             </li>

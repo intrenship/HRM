@@ -45,6 +45,11 @@ class adminController extends Controller
     {
 		$datas = crud_admin::orderBy('id','DESC')->paginate(10);
 		return view('/superadmin/news_view')->with('datas', $datas);
+    }	
+	public function views_users()
+    {
+		$datas = Reg::orderBy('id','DESC')->paginate(10);
+		return view('/superadmin/users_view')->with('datas', $datas);
     }
 	 public function create_users()
     {
