@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\crud_admin;
+use App\Reg;
 
 class adminController extends Controller
 {
@@ -14,6 +15,36 @@ class adminController extends Controller
     {
         //
 		return view('/superadmin/add');
+    }
+	public function edit_news($id)
+    {
+        $tampiledit = crud_admin::where('id', $id)->first();
+        return view('/superadmin/edit_news')->with('tampiledit', $tampiledit);
+    }
+	public function update_news(Request $request, $id)
+    {
+        $update = crud_admin::where('id', $id)->first();
+        $update->judul = $request['judul'];
+        $update->berita = $request['berita'];
+
+       if($request->file('gambar') == "")
+        {
+            $update->gambar = $update->gambar;
+        } 
+        else
+        {
+            $file       = $request->file('gambar');
+            $fileName   = $file->getClientOriginalName();
+            $request->file('gambar')->move("image/", $fileName);
+            $update->gambar = $fileName;
+        }
+		$update->update();
+        return redirect()->to('view_news');
+    }
+	public function views_news()
+    {
+		$datas = crud_admin::orderBy('id','DESC')->paginate(10);
+		return view('/superadmin/news_view')->with('datas', $datas);
     }
 	 public function create_users()
     {
@@ -27,6 +58,7 @@ class adminController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+	 	 
     public function insert_news(Request $request)
     {
         //
@@ -47,27 +79,25 @@ class adminController extends Controller
      $tambah->save();
 
      return redirect()->to('/superadmin');
-    }
-	  
+    } 	 
   public function register1(Request $request)
     {
         //
 
 	$this->validate($request, [
-      'name' => 'required',
-      'username' => 'required',
-	  'email' => 'required',
-      'password' => 'required'	  
+          'name' => 'required|max:255',
+            'email' => 'required|email|max:255|unique:users',
+            'password' => 'required|confirmed|min:6',
 ]);
 	$tambah = new Reg();
      $tambah->name = $request['name'];
-     $tambah->username = $request['username'];
 	 $tambah->email = $request['email'];
-     $tambah->password = $request['password'];
+	 $tambah->id_group = $request['id_group'];
+     $tambah->password = bcrypt($request['password']);
+	 
      $tambah->save();
-		dd('succes');
 
-     return redirect()->to('../utama');
+     return redirect()->to('/superadmin');
     }
 
     /**
@@ -76,11 +106,7 @@ class adminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        $tampilkan = Crud::find($id);
-        return view('tampil')->with('tampilkan', $tampilkan);
-    }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -88,43 +114,13 @@ class adminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        //
-		   $tampiledit = Crud::where('id', $id)->first();
-        return view('edit')->with('tampiledit', $tampiledit);
-    }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-		  $update = Crud::where('id', $id)->first();
-        $update->judul = $request['judul'];
-        $update->isi = $request['isi'];
-        $update->update();
-
-        return redirect()->to('/');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         //
-		   $hapus = Crud::find($id);
+		   $hapus = crud_admin::find($id);
         $hapus->delete();
 
-        return redirect()->to('/');
+        return redirect()->to('view_news');
     }
 }

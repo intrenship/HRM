@@ -37,7 +37,7 @@
             <li><a href="#"><i class="fa fa-fw fa-newspaper-o"></i> <span>News</span><i class="fa fa-angle-left pull-right"></i></a>
 			 <ul class="treeview-menu">
                     <li><a href="{{ url('add_news') }}">Create</a></li>
-                    <li><a href="#">View</a></li>
+                    <li><a href="{{ url('view_news') }}">View</a></li>
                 </ul></li>
             <li class="treeview">
                 <a href="#"><i class='fa fa-users text-aqua'></i> <span>User</span> <i class="fa fa-angle-left pull-right"></i></a>

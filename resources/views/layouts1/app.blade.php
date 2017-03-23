@@ -3,6 +3,21 @@
 This is a starter template page. Use this page to start your new project from
 scratch. This page gets rid of all links and provides the needed markup only.
 -->
+
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="{{asset('/js/materialize.min.js')}}"></script>
+
+<script type="text/javascript">
+	(function ($){
+		$(function (){
+			$('.button-collapse').sideNav();
+		});
+		
+		})(jQuery);
+</script>
+@section('js')
+
+@show
 <html lang="en">
 
 @section('htmlheader')

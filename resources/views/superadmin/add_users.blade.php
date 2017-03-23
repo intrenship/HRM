@@ -50,7 +50,7 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body pad">
-              <form action="{{ url('/register') }}" method="post">
+              <form action="{{ url('users_insert') }}" method="post">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <div class="form-group has-feedback">
                     <input type="text" class="form-control" placeholder="{{ trans('adminlte_lang::message.fullname') }}" name="name" value="{{ old('name') }}"/>
