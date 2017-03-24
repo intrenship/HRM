@@ -24,7 +24,7 @@
 			    {!! csrf_field() !!}
 
 		<div class="box-body">
-                <div class="form-group" align>
+                <div class="form-group" >
                   <label for="exampleInputEmail1">Headline</label>
                   <p align="center"><input type="text" class="form-control" id="judul" name="judul" value="{{ $tampiledit->judul }}">
                 </div>

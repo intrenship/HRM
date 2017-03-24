@@ -13,3 +13,11 @@ class Reg extends Model
 	public $timestamps = true;
 
 }
+class lowongan extends Model
+{
+	protected $table = 'lowongan';
+	protected $primarykey = 'id';
+	protected $fillable = ['lowongan', 'kualifikasi'];
+	public $timestamps = true;
+
+}

@@ -1,25 +1,6 @@
 @extends('layouts1.app')
 
 @section('main-content')
-	<form action="{{ url('query_users') }}" method="GET">
-    <div class="row">
-          <div class="box-body">
-                <div class="form-group" >
-				    <div class="col-md-3">
-					                <div class="input-group" >
-
-						<input type="text" name="q" class="form-control" placeholder="Search...">
-						<span class="input-group-btn">
-						<button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
-						</button>
-						</span>
-					</div>
-				</div>
-				</div>
-          </div>
-    </div>
- </form>
-  
 	<section class="content">
       <div class="row">
         <div class="col-md-12">
@@ -48,7 +29,9 @@
                   <th>Action</th>
                 </tr>
                 </thead>
-					@foreach($datas as $data)
+				@if (count($hasil))
+Hasil pencarian : <b>{{$query}}
+					@foreach($hasil as $data)
 
                 <tbody>
                 <tr>
@@ -57,18 +40,16 @@
                   </td>
                   <td>  {{ $data->email }}</td>
                   <td>  {{ $data->id_group }}</td>
-                 <td>  
-				    
-					<div class="input-group">
-						<span class="input-group-btn"><a href="{{ url('edit_users', $data->id) }}"><button type="button" class="btn btn-block btn-warning">Edit <i class="fa fa-edit"></i></button></a> </span>
-						<span class="input-group-btn"><a href="{{ url('delete_user', $data->id) }}"><button type="button" class="btn btn-block btn-danger">Delete <i class="fa fa-fw fa-close"></i></button></a>
-					</span>
-					</div>
-				 </td>
+                 <td><a href="{{ url('edit_users', $data->id) }}"><button type="button" class="btn btn-block btn-warning">Edit <i class="fa fa-edit"></i></button></a> <a href="{{ url('delete_user', $data->id) }}"><button type="button" class="btn btn-block btn-danger">Delete <i class="fa fa-fw fa-close"></i></button></a></td>
                 </tr>
                 </tbody>
+				
 					@endforeach
-
+				
+@else
+   <div class="card-panel red darken-3 white-text">Oops.. Data <b>{{$query}}</b> Tidak Ditemukan</div>
+@endif
+	
                 <tfoot>
                 <tr>
                  <th>User ID</th>
@@ -79,7 +60,14 @@
                 </tr>
                 </tfoot>
               </table>
-			  {{ $datas->render() }}
+			 
+{{ $hasil->render() }}
+				<br />
+
+ <div class="col-md-4">
+
+					<a href="#" onclick="history.back();"> <button type="submit" class="btn btn-block btn-primary">Back</button></a>   
+				</div>
             </div>
           </div>
         </div>

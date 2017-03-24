@@ -84,7 +84,7 @@ Landing page based on Pratt: http://blacktie.co/demo/pratt/
 
             </div>
             <div class="col-lg-8">
-               <p align="center"> <img class="img-responsive" src="{{ asset('/img/wpw6wvjzcjnl8fmn3kat.png') }}" alt=""></p>
+               <p align="center"> <img align="center" class="img-responsive" width="720" height="400" src="{{ asset('/img/wpw6wvjzcjnl8fmn3kat.png') }}" alt=""></p>
             </div>
             <div class="col-lg-2">
                 <br>

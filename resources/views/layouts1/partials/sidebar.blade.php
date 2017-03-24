@@ -50,8 +50,8 @@
 			  <li class="treeview">
                 <a href="#"><i class="fa fa-fw fa-sitemap"></i> <span>Job Vacancy</span> <i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
-                    <li><a href="#">View Job Vacancy</a></li>
-					<li><a href="#">Create Job Vacancy</a></li>
+					<li><a href="{{ url('add_jobs') }}">Create Job Vacancy</a></li>
+                    <li><a href="">View Job Vacancy</a></li>
                 </ul>
             </li>
         </ul><!-- /.sidebar-menu -->

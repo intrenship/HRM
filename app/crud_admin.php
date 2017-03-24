@@ -11,12 +11,4 @@ class crud_admin extends Model
 	protected $fillable = ['berita'];
 	public $timestamps = false;
 }
-class Reg extends Model
-{
-	protected $table = 'users';
-	protected $primarykey = 'id';
-	protected $fillable = ['name', 'email', 'password'];
-    protected $hidden = ['password', 'remember_token',];
-	public $timestamps = false;
 
-}

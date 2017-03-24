@@ -128,14 +128,12 @@
                                 <img src="{{asset('/img/user2-160x160.jpg')}}" class="img-circle" alt="User Image" />
                                 <p>
                                     {{ Auth::user()->name }}
-                                    <small>{{ trans('adminlte_lang::message.login') }} Nov. 2012</small>
+                                    <small>{{ trans('adminlte_lang::message.login') }} {{date("d-m-Y")}} ?></small>
                                 </p>
                             </li>
                             <!-- Menu Body -->
                             <li class="user-body">
-                                <div class="col-xs-4 text-center">
-                                    <a href="#">{{ trans('adminlte_lang::message.followers') }}</a>
-                                </div>
+                               
                                 <div class="col-xs-4 text-center">
                                     <a href="#">{{ trans('adminlte_lang::message.sales') }}</a>
                                 </div>

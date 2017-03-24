@@ -54,7 +54,6 @@ desired effect
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
 
-        @include('layouts1.partials.contentheader')
 
         <!-- Main content -->
         <section class="content">

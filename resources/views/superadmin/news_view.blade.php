@@ -43,7 +43,7 @@
                   <td>{{ $data->id_berita }}</td>
                   <td>{{ $data->judul }}
                   </td>
-                  <td>   <img src="{{ asset('image/'.$data->gambar)  }}" style="max-height:200px;max-width:200px;margin-top:10px;"><br />{{ $data->berita }}</td>
+                  <td>   <img src="{{ asset('image/'.$data->gambar)  }}" style="max-height:200px;max-width:200px;margin-top:10px;"><br />{!! $data->berita  !!}</td>
                  <td><a href="{{ url('edit_news', $data->id) }}"><button type="button" class="btn btn-block btn-warning">Edit <i class="fa fa-edit"></i></button></a> <a href="{{ url('delete', $data->id) }}"><button type="button" class="btn btn-block btn-danger">Delete <i class="fa fa-fw fa-close"></i></button></a></td>
                 </tr>
                 </tbody>

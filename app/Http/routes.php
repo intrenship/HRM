@@ -21,15 +21,30 @@ Route::group(['middleware' => ['web','auth']], function(){
 	/*superadmin*/
 	Route::get('/home', 'HomeController@index');
 	Route::get('/superadmin', 'HomeController@superadmin');
+	//news
 	Route::get('/add_news', 'adminController@create_news');
-	Route::get('/add_users', 'adminController@create_users');
 	Route::post('/store', 'adminController@insert_news');
-	Route::post('/users_insert', 'adminController@register1');
 	Route::get('/view_news', 'adminController@views_news');
-	Route::get('/view_users', 'adminController@views_users');
 	Route::get('/edit_news/{id}', 'adminController@edit_news');
-	Route::get('/delete/{id}', 'adminController@destroy');
 	Route::post('/update_news/{id}', 'adminController@update_news');
+	Route::get('/delete/{id}', 'adminController@destroy');
+
+	//users
+	Route::get('/add_users', 'adminController@create_users');
+	Route::get('/view_users', 'adminController@views_users');
+	Route::get('/edit_users/{id}', 'adminController@edit_users');
+	Route::post('/update_users/{id}', 'adminController@update_users');
+	Route::get('/query_users', 'adminController@search_user');
+	Route::post('/users_insert', 'adminController@register1');
+	Route::get('/delete_user/{id}', 'adminController@destroy_user');
+
+	//jobs
+	Route::get('/add_jobs', 'adminController@create_jobs');
+	Route::post('/jobs', 'adminController@insert_jobs');
+	Route::get('/view_jobs', 'adminController@views_jobs');
+	Route::get('/delete_jobs/{id}', 'adminController@destroy_jobs');
+	Route::get('/edit_jobs/{id}', 'adminController@edit_jobs');
+	Route::post('/update_jobs/{id}', 'adminController@update_jobs');
 
 	/*login*/
 	Route::get('/login1', function(){
