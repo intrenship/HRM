@@ -1,8 +1,4 @@
-@extends('layout.app')
-
-@section('htmlheader_title')
-	Home
-@endsection
+@extends('layouts.app')
 
 
 @section('main-content')

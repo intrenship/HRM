@@ -1,15 +1,7 @@
 @extends('layouts1.app')
 
 @section('main-content')
-	<style type="text/css">
-
-.textarea-none-resize{
- width: 1000px;
- height: 180px;
- resize: none;
-}
-</style>
-<form action="{{ url('query_news') }}" method="GET">
+	<form action="{{ url('query_news') }}" method="GET">
     <div class="row">
           <div class="box-body">
                 <div class="form-group" >
@@ -27,6 +19,7 @@
           </div>
     </div>
  </form>
+  
 	<section class="content">
       <div class="row">
         <div class="col-md-12">
@@ -48,9 +41,10 @@
              <table id="example2" class="table table-bordered table-hover">
                 <thead>
                 <tr>
-                  <th>News ID</th>
-                  <th>Headline</th>
-                  <th>Content</th>
+                  <th>User ID</th>
+                  <th>Lowongan</th>
+                  <th>katagori</th>
+                  <th>Kualifikasi</th>
                   <th>Action</th>
                 </tr>
                 </thead>
@@ -58,20 +52,30 @@
 
                 <tbody>
                 <tr>
-                  <td>{{ $data->id}}</td>
-                  <td>{{ $data->judul }}
+                  <td>{{ $data->id }}</td>
+                  <td>{{ $data->lowongan }}
                   </td>
-                  <td>   <img src="{{ asset('image/'.$data->gambar)  }}" style="max-height:200px;max-width:200px;margin-top:10px;"><br />{!! $data->berita  !!}</td>
-                 <td><a href="{{ url('edit_news', $data->id) }}"><button type="button" class="btn btn-block btn-warning">Edit <i class="fa fa-edit"></i></button></a> <a href="{{ url('delete', $data->id) }}"><button type="button" class="btn btn-block btn-danger">Delete <i class="fa fa-fw fa-close"></i></button></a></td>
+                  <td>  {{ $data->katagori }}</td>
+                  <td>  {!! $data->kualifikasi !!}</td>
+                 <td>  
+				    
+					<div class="input-group">
+						<span class="input-group-btn"><a href="{{ url('edit_jobs', $data->id) }}"><button type="button" class="btn btn-block btn-warning">Edit <i class="fa fa-edit"></i></button></a> </span>
+						<span class="input-group-btn"><a href="{{ url('delete_jobs', $data->id) }}"><button type="button" class="btn btn-block btn-danger">Delete <i class="fa fa-fw fa-close"></i></button></a>
+					</span>
+					</div>
+				 </td>
                 </tr>
                 </tbody>
 					@endforeach
 
                 <tfoot>
                 <tr>
-                  <th>News ID</th>
-                  <th>Headline</th>
-                  <th>Content</th>
+                  <th>User ID</th>
+                  <th>Lowongan</th>
+                  <th>katagori</th>
+                  <th>Kualifikasi</th>
+                  <th>Action</th>
                 </tr>
                 </tfoot>
               </table>

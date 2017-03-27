@@ -37,12 +37,22 @@
 				-->
 	
               </div>
-  		  	  <div class="box-body">
-			  <div class="form-group">
-                  <label>Content</label>
-              </div>
-				<p align="center"><textarea class="form-control" cols="200" rows="10" placeholder="Place enter content" name="berita">{{ $tampiledit->berita }}</textarea></p>
-<div class="box-body">
+			  
+			  
+			  	<div class="box box-info">
+            <div class="box-header">
+              <h3 class="box-title">Qualification
+              </h3>
+				<div class="box-body pad">
+
+			  <textarea id="editor1" name="berita" rows="10" cols="80">{!! $tampiledit->berita  !!}
+                    </textarea>
+					</div>
+					</div>
+					</div>
+			  
+			  
+  		  	 <div class="box-body">
 	<div class="form-group">
 		<div class="row">
         <div class="input-field col s6">
@@ -52,6 +62,8 @@
       </div>            
 			<div class="box-footer">
                 <button type="submit" class="btn btn-primary">Submit</button>
+			   <a href="#" onclick="history.back();"> <button type="submit" class="btn btn-primary">Back</button></a>   
+
              </div>
              </div>
 			 </form>

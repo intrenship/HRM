@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\crud_admin;
 use App\Reg;
-use App\Reg\lowongan;
+use App\jobs;
 
 class adminController extends Controller
 {
@@ -22,6 +22,15 @@ class adminController extends Controller
         $tampiledit = crud_admin::where('id', $id)->first();
         return view('/superadmin/edit_news')->with('tampiledit', $tampiledit);
     }
+	
+	 public function search_news(Request $request)
+    {
+        $query = $request->get('q');
+        $hasil = crud_admin::	where('judul', 'like', '%' . $query . '%')->paginate(7);
+
+        return view('superadmin/search_news', compact('hasil', 'query'));
+    }
+	
 	public function update_news(Request $request, $id)
     {
         $update = crud_admin::where('id', $id)->first();
@@ -130,12 +139,17 @@ class adminController extends Controller
 
         return view('superadmin/search_user', compact('hasil', 'query'));
     }
+	
 	 public function create_users()
     {
         //
 		return view('/superadmin/add_users');
     }
-
+ public function cari_lowongan()
+    {
+        		$datas = jobs::orderBy('id','DESC')->paginate(8);
+		return view('/user/search')->with('datas', $datas);
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -155,26 +169,41 @@ class adminController extends Controller
     {
         //
 		$this->validate($request, [
-      'judul' => 'required',
-      'berita' => 'required'
+      'lowongan' => 'required',
+      'kualifikasi' => 'required',
+      'katagori' => 'required'
 ]);
 
-     $tambah = new crud_admin();
-     $tambah->judul = $request['judul'];
-     $tambah->berita = $request['berita'];
-// Disini proses mendapatkan judul dan memindahkan letak gambar ke folder image
-        $file       = $request->file('gambar');
-        $fileName   = $file->getClientOriginalName();
-        $request->file('gambar')->move("image/", $fileName);
+     $tambah = new jobs();
+     $tambah->lowongan = $request['lowongan'];
+     $tambah->kualifikasi = $request['kualifikasi'];
+     $tambah->katagori = $request['katagori'];
 
-        $tambah->gambar = $fileName;
      $tambah->save();
 
      return redirect()->to('/superadmin');
     } 	 
-	
+	public function views_jobs()
+    {
+		$datas = jobs::orderBy('id','DESC')->paginate(8);
+		return view('/superadmin/jobs_view')->with('datas', $datas);
+    }
    
-  
+  public function edit_jobs($id)
+    {
+        $tampiledit = jobs::where('id', $id)->first();
+        return view('/superadmin/edit_jobs')->with('tampiledit', $tampiledit);
+    }
+	public function update_jobs(Request $request, $id)
+    {
+        $update = jobs::where('id', $id)->first();
+        $update->lowongan = $request['lowongan'];
+        $update->katagori = $request['katagori'];
+        $update->kualifikasi = $request['kualifikasi'];
+	
+	$update->update();
+        return redirect()->to('view_jobs');
+    }
 
     /**
      * Display the specified resource.
@@ -198,12 +227,21 @@ class adminController extends Controller
         $hapus->delete();
 
         return redirect()->to('view_news');
-    }    public function destroy_user($id)
+    }    
+	public function destroy_user($id)
     {
         //
 		   $hapus = Reg::find($id);
         $hapus->delete();
 
         return redirect()->to('view_users');
+    }public function destroy_jobs($id)
+    {
+        //
+		   $hapus = jobs::find($id);
+        $hapus->delete();
+
+        return redirect()->to('view_jobs');
     }
+	
 }

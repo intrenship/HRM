@@ -2,6 +2,8 @@
 <!--
 Landing page based on Pratt: http://blacktie.co/demo/pratt/
 -->
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -60,12 +62,14 @@ Landing page based on Pratt: http://blacktie.co/demo/pratt/
                 <li><a href="#showcase" class="smoothScroll">{{ trans('adminlte_lang::message.showcase') }}</a></li>
                 <li><a href="#contact" class="smoothScroll">{{ trans('adminlte_lang::message.contact') }}</a></li>
             </ul>
+			
             <ul class="nav navbar-nav navbar-right">
                 @if (Auth::guest())
                     <li><a href="{{ url('/login1') }}">{{ trans('adminlte_lang::message.login') }}</a></li>
                     <li><a href="{{ url('/register') }}">{{ trans('adminlte_lang::message.register') }}</a></li>
                 @else
-                    <li><a href="/home">{{ Auth::user()->name }}</a></li>
+                    <li><a href="#">{{ Auth::user()->name }}</a></li>
+				    <li><a href="{{ url('/logout') }}">Logout</a></li>
                 @endif
             </ul>
         </div><!--/.nav-collapse -->
@@ -107,16 +111,31 @@ Landing page based on Pratt: http://blacktie.co/demo/pratt/
 			
 			</p>
             <div class="col-lg-4">
-				<a href="">
+			@if (Auth::guest())
+			<img src="{{ asset('/img/rekrutmen.png') }}" alt="">
+					<h3>Job Vacancy</h3>
+			@else
+
+				<a href="{{ url('search_lowongan') }}">
 					<img src="{{ asset('/img/rekrutmen.png') }}" alt="">
 					<h3>Job Vacancy</h3>
 				</a>
+			@endif
             </div>
             <div class="col-lg-4">
-				<a href="">
+			@if (Auth::guest())
+
+				<a href="{{ url('/register') }}">
 					<img src="{{ asset('/img/register1.png') }}" alt="">
 					<h3>Register Now</h3>
 				</a>
+				@else
+					
+				<a href="">
+					<img src="{{ asset('/img/timthumb.png') }}" alt="">
+					<h3>Lengkapi Biodata</h3>
+				</a>
+				@endif
             </div>
             <div class="col-lg-4">
 				<a href="">

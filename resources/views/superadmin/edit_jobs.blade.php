@@ -27,16 +27,16 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body pad">
-              <form action="{{url('jobs_insert')}}" method="POST">
+              <form action="{{ url('update_jobs', $tampiledit->id) }}" method="POST">
 			    {!! csrf_field() !!}
 		  <div class="box-body pad">               
                 <div class="form-group has-feedback">
-                    <input type="text" class="form-control" placeholder="Lowongan" name="lowongan"/>
+                    <input type="text" class="form-control" placeholder="Lowongan" name="lowongan" value="{{ $tampiledit->lowongan}}"/>
                  <!--   <span class="glyphicon glyphicon-envelope form-control-feedback"></span> -->
                 </div>
 				 <div class="form-group has-feedback">
-                  <select class="form-control" name="katagori">
-					<option >Katagori</option>	
+                  <select class="form-control" name="katagori" >
+					<option value="{{ $tampiledit->katagori}}">{{ $tampiledit->katagori}}</option>	
                     <option value="IT">IT</option>
                     <option value="Marketing">Marketing</option>
                     <option value="HRD">HRD</option>
@@ -51,7 +51,7 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body pad">
-                    <textarea id="editor1" name="kualifikasi" rows="10" cols="80">
+                    <textarea id="editor1" name="kualifikasi" rows="10" cols="80">{!! $tampiledit->kualifikasi !!}
                     </textarea>
             </div>
                    <button type="submit" class="btn btn-primary btn-block btn-flat">Save</button>  
