@@ -120,7 +120,7 @@ Landing page based on Pratt: http://blacktie.co/demo/pratt/
     <div class="container">
         <div class="row centered">
            
-			<form action="{{ url('') }}" method="GET">
+			<form action="{{ url('search_lowongan1') }}" method="GET">
     <div class="row">
           <div class="box-body">
                 <div class="form-group" >
@@ -163,7 +163,6 @@ Landing page based on Pratt: http://blacktie.co/demo/pratt/
                   <th>Lowongan</th>
                   <th>katagori</th>
                   <th>Kualifikasi</th>
-                  <th>Action</th>
                 </tr>
                 </thead>
 					@foreach($datas as $data)
@@ -174,13 +173,7 @@ Landing page based on Pratt: http://blacktie.co/demo/pratt/
                   </td>
                   <td>  {{ $data->katagori }}</td>
                   <td>  {!! $data->kualifikasi !!}</td>
-                 <td>  
-				    
-					<div class="input-group">
-						<span class="input-group-btn"><a href="{{ url('delete_jobs', $data->id) }}"><button type="button" class="btn btn-block btn-danger">Delete <i class="fa fa-fw fa-close"></i></button></a>
-					</span>
-					</div>
-				 </td>
+                 
                 </tr>
                 </tbody>
 					@endforeach
@@ -190,7 +183,6 @@ Landing page based on Pratt: http://blacktie.co/demo/pratt/
                   <th>Lowongan</th>
                   <th>katagori</th>
                   <th>Kualifikasi</th>
-                  <th>Action</th>
                 </tr>
                 </tfoot>
               </table>

@@ -131,14 +131,14 @@ Landing page based on Pratt: http://blacktie.co/demo/pratt/
 				</a>
 				@else
 					
-				<a href="">
+				<a href="{{ url('/add_biodata') }}">
 					<img src="{{ asset('/img/timthumb.png') }}" alt="">
 					<h3>Lengkapi Biodata</h3>
 				</a>
 				@endif
             </div>
             <div class="col-lg-4">
-				<a href="">
+				<a href="{{ url('/mail') }}">
 					<img src="{{ asset('/img/intro03.png') }}" alt="">
 					<h3>Galary</h3>
 				</a>

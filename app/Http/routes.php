@@ -32,6 +32,7 @@ Route::group(['middleware' => ['web','auth']], function(){
 
 	//users
 	Route::get('/add_users', 'adminController@create_users');
+	Route::get('/add_biodata', 'adminController@biodata');
 	Route::get('/view_users', 'adminController@views_users');
 	Route::get('/edit_users/{id}', 'adminController@edit_users');
 	Route::post('/update_userens/{id}', 'adminController@update_users');
@@ -49,6 +50,7 @@ Route::group(['middleware' => ['web','auth']], function(){
 	/*login*/
 	//home
 	Route::get('/search_lowongan', 'adminController@cari_lowongan');
+	Route::get('/search_lowongan1', 'adminController@cari_lowongan1');
 
 	
 	Route::get('/login1', function(){

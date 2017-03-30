@@ -36,6 +36,34 @@ Landing page based on Pratt: http://blacktie.co/demo/pratt/
     <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Raleway:400,300,700' rel='stylesheet' type='text/css'>
 
+	 <link href="{{ asset('/css/bootstrap.css') }}" rel="stylesheet" type="text/css" />
+    <!-- Font Awesome Icons -->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <!-- Ionicons -->
+    <link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css" />
+    <!-- Theme style -->
+    <link href="{{ asset('/css/AdminLTE.css') }}" rel="stylesheet" type="text/css" />
+    <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
+          page. However, you can choose any other skin. Make sure you
+          apply the skin class to the body tag so the changes take effect.
+    -->
+	<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+
+  <link rel="stylesheet" href="{{ asset('../../bootstrap/css/bootstrap.min.css') }}">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="{{ asset('../../dist/css/AdminLTE.min.css') }}">
+  <!-- AdminLTE Skins. Choose a skin from the css/skins
+       folder instead of downloading all of them to reduce the load. -->
+  <link rel="stylesheet" href="{{ asset('../../dist/css/skins/_all-skins.min.css') }}">
+  <!-- bootstrap wysihtml5 - text editor -->
+  <link rel="stylesheet" href="{{ asset('../../plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css') }}">
+    <link href="{{ asset('/css/skins/skin-blue.css') }}" rel="stylesheet" type="text/css" />
+    <!-- iCheck -->
+    <link href="{{ asset('/plugins/iCheck/square/blue.css') }}" rel="stylesheet" type="text/css" />
     <script src="{{ asset('/plugins/jQuery/jQuery-2.1.4.min.js') }}"></script>
     <script src="{{ asset('/js/smoothscroll.js') }}"></script>
 
@@ -53,7 +81,7 @@ Landing page based on Pratt: http://blacktie.co/demo/pratt/
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#"><b>Digital Oasis</b></a>
+            <a class="navbar-brand"  onclick="history.back();" href="#"><b>Digital Oasis</b></a>
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
@@ -81,106 +109,111 @@ Landing page based on Pratt: http://blacktie.co/demo/pratt/
 <div id="headerwrap">
     <div class="container">
         <div class="row centered">
-            <div class="col-lg-12">
-                <h1>Digital <b><a href="http://www.digitaloasis.co.id/">Oasis</a></b></h1>
-            </div>
-            <div class="col-lg-2">
-
-            </div>
-            <div class="col-lg-8">
-               <p align="center"> <img class="img-responsive" src="{{ asset('/img/wpw6wvjzcjnl8fmn3kat.png') }}" alt=""></p>
-            </div>
-            <div class="col-lg-2">
-                <br>
-               
-            </div>
+            <h1><img src="{{ asset('/img/dios.png') }}" alt=""></h1>
         </div>
     </div> <!--/ .container -->
 </div><!--/ #headerwrap -->
-
-
 <section id="desc" name="desc"></section>
 <!-- INTRO WRAP -->
+
 <div id="intro">
     <div class="container">
         <div class="row centered">
-            <h1><img src="{{ asset('/img/dios.png') }}" alt=""></h1>
-            <br>
-            <b>
-			<p align="justify"> Digital Oasis is an IT company based in Bandung and established in September 2011. The company is specialized in IT consulting and software development
-			
-			</p>
-            <div class="col-lg-4">
-			@if (Auth::guest())
-			<img src="{{ asset('/img/rekrutmen.png') }}" alt="">
-					<h3>Job Vacancy</h3>
-			@else
-				<a href="{{ url('/cari_lowongn') }}">
-					<img src="{{ asset('/img/rekrutmen.png') }}" alt="">
-					<h3>Job Vacancy</h3>
-				</a>
-			@endif
-            </div>
-            <div class="col-lg-4">
-			@if (Auth::guest())
+           
+			<form action="{{ url('search_lowongan1') }}" method="GET">
+    <div class="row">
+          <div class="box-body">
+                <div class="form-group" >
+				    <div class="col-md-3">
+					                <div class="input-group" >
 
-				<a href="{{ url('/register') }}">
-					<img src="{{ asset('/img/register1.png') }}" alt="">
-					<h3>Register Now</h3>
-				</a>
-				@else
-					
-				<a href="{{ url('/add_biodata') }}">
-					<img src="{{ asset('/img/timthumb.png') }}" alt="">
-					<h3>Lengkapi Biodata</h3>
-				</a>
-				@endif
+						<input type="text" name="q" class="form-control" placeholder="Search...">
+						<span class="input-group-btn">
+						<button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
+						</button>
+						</span>
+					</div>
+				</div>
+				</div>
+          </div>
+    </div>
+ </form>
+  
+	<section class="content">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="box box-info">
+            <div class="box-header">
+
+              <!-- /. tools -->
+           
+            <!-- /.box-header -->
+           
+          <!-- /.box -->
+
+          <div class="box">
+            
+              <!-- /. tools -->
             </div>
-            <div class="col-lg-4">
-				<a href="{{ url('/mail') }}">
-					<img src="{{ asset('/img/intro03.png') }}" alt="">
-					<h3>Galary</h3>
-				</a>
+            <!-- /.box-header -->
+            <div class="box-body pad">
+             <table id="example2" class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                  <th>Lowongan</th>
+                  <th>katagori</th>
+                  <th>Kualifikasi</th>
+                  <th>Action</th>
+                </tr>
+                </thead>
+				@if (count($hasil))
+Hasil pencarian : <b>{{$query}}
+					@foreach($hasil as $data)
+                <tbody>
+                <tr>
+                  <td>{{ $data->lowongan }}
+                  </td>
+                  <td>  {{ $data->katagori }}</td>
+                  <td>  {!! $data->kualifikasi !!}</td>
+                 <td>  
+				    
+					<div class="input-group">
+						<span class="input-group-btn"><a href="{{ url('') }}"><button type="button" class="btn btn-block btn-danger">Applay <i class="fa fa-fw fa-close"></i></button></a>
+					</span>
+					</div>
+				 </td>
+                </tr>
+                </tbody>
+				
+					@endforeach
+				
+@else
+   <div class="card-panel red darken-3 white-text">Oops.. Data <b>{{$query}}</b> Tidak Ditemukan</div>
+@endif
+	
+                <tfoot>
+                <tr>
+                  <th>Lowongan</th>
+                  <th>katagori</th>
+                  <th>Kualifikasi</th>
+                  <th></th>
+                </tr>
+                </tfoot>
+              </table>
+			  {{ $hasil->render() }}
             </div>
+          </div>
+        </div>
+        <!-- /.col-->
+      </div>
+      <!-- ./row -->
+    </section>
+			
         </div>
         <br>
         <hr>
     </div> <!--/ .container -->
 </div><!--/ #introwrap -->
-
-<section id="showcase" name="showcase"></section>
-<div id="showcase">
-    <div class="container">
-        <div class="row">
-            <h1 class="centered">{{ trans('adminlte_lang::message.screenshots') }}</h1>
-            <br>
-            <div class="col-lg-8 col-lg-offset-2">
-                <div id="carousel-example-generic" class="carousel slide">
-                    <!-- Indicators -->
-                    <ol class="carousel-indicators">
-                        <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-                        <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-                    </ol>
-
-                    <!-- Wrapper for slides -->
-                    <div class="carousel-inner">
-                        <div class="item active">
-                            <img src="{{ asset('/img/item-01 copy2.png') }}" alt="">
-                        </div>
-                        <div class="item">
-                            <img src="{{ asset('/img/item-03.png') }}" alt="">
-                        </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <br>
-        <br>
-        <br>
-    </div><!-- /container -->
-</div>
-
 
 <section id="contact" name="contact"></section>
 <div id="footerwrap">

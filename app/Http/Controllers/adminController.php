@@ -8,7 +8,7 @@ use App\Http\Requests;
 use App\crud_admin;
 use App\Reg;
 use App\jobs;
-
+use Mail;
 class adminController extends Controller
 {
 	//news 
@@ -94,16 +94,17 @@ class adminController extends Controller
 	 $tambah->email = $request['email'];
 	 $tambah->id_group = $request['id_group'];
      $tambah->password = bcrypt($request['password']);
-	 
-     $tambah->save();
 
+	 
+	 
+	Mail::send('user.pesan', $data, function($pesan) {
+    $pesan->to('jaka.1453karang@gmail.com', 'El Cicko')->subject('Selamat datang di Laravel!');
+});
+     $tambah->save();
+		
      return redirect()->to('/superadmin');
     }
-	public function edit_users($id)
-    {
-        $tampiledit = Reg::where('id', $id)->first();
-        return view('/superadmin/edit_users')->with('tampiledit', $tampiledit);
-    }
+
 	public function update_users(Request $request, $id)
     {
         $update = Reg::where('id', $id)->first();
@@ -139,16 +140,21 @@ class adminController extends Controller
 
         return view('superadmin/search_user', compact('hasil', 'query'));
     }
-	
-	 public function create_users()
+	public function create_users()
     {
         //
 		return view('/superadmin/add_users');
     }
- public function cari_lowongan()
+	public function cari_lowongan()
     {
         		$datas = jobs::orderBy('id','DESC')->paginate(8);
 		return view('/user/search')->with('datas', $datas);
+    }
+	
+		 public function biodata()
+    {
+        //
+		return view('/user/biodata');
     }
     /**
      * Store a newly created resource in storage.
@@ -204,14 +210,19 @@ class adminController extends Controller
 	$update->update();
         return redirect()->to('view_jobs');
     }
+ public function cari_lowongan1(Request $request)
+    {
+        $query = $request->get('q');
+        $hasil = jobs::	where('lowongan',  'like', '%' . $query . '%')->paginate(7);
 
+        return view('user/search_lowongan', compact('hasil', 'query'));
+    }
     /**
      * Display the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-
 
     /**
      * Show the form for editing the specified resource.
