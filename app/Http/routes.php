@@ -32,13 +32,22 @@ Route::group(['middleware' => ['web','auth']], function(){
 
 	//users
 	Route::get('/add_users', 'adminController@create_users');
-	Route::get('/add_biodata', 'adminController@biodata');
+	Route::get('/test', 'userController@biodata');
+	Route::get('/add_biodata/{id}', 'adminController@biodata');
+	Route::get('/edit_biodata/{id}', 'adminController@editbiodata');
+	Route::post('/update_biodata/{id_user}', 'adminController@updatebiodata');
+	Route::post('/lamaran_kerja/', 'adminController@lamaran');
 	Route::get('/view_users', 'adminController@views_users');
 	Route::get('/edit_users/{id}', 'adminController@edit_users');
 	Route::post('/update_userens/{id}', 'adminController@update_users');
 	Route::get('/query_users', 'adminController@search_user');
 	Route::post('/users_insert', 'adminController@register1');
 	Route::get('/delete_user/{id}', 'adminController@destroy_user');
+	Route::post('/insert_biodata', 'adminController@insert_biodata');
+	
+	Route::post('/lamaran', 'adminController@insert_lamaran');
+	Route::post('/lamaran1', 'adminController@insert_lamaran1');
+	Route::get('/lamaran3', 'adminController@lamaran_view');
 
 	//jobs
 	Route::get('/add_jobs', 'adminController@create_jobs');
@@ -49,8 +58,9 @@ Route::group(['middleware' => ['web','auth']], function(){
 	Route::post('/update_jobs/{id}', 'adminController@update_jobs');
 	/*login*/
 	//home
-	Route::get('/search_lowongan', 'adminController@cari_lowongan');
-	Route::get('/search_lowongan1', 'adminController@cari_lowongan1');
+	Route::get('/search_lowongan/{id}', 'adminController@cari_lowongan');
+	Route::get('/search_lowongan1/', 'adminController@cari_lowongan1');
+	//biodata//
 
 	
 	Route::get('/login1', function(){
