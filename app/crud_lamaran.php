@@ -3,12 +3,12 @@
 namespace App;
 use Illuminate\Database\Eloquent\Model;
 
-class crud_admin extends Model
+class crud_lamaran extends Model
 {
     //
-	protected $table = 'berita';
+	protected $table = 'lamaran';
 	protected $primarykey = 'id';
-	protected $fillable = ['judul','berita', 'gambar'];
+	protected $fillable = ['file_cv','id_users', 'id_lowonga','status'];
 	public $timestamps = false;
 }
 

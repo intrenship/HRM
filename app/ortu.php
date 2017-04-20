@@ -3,12 +3,12 @@
 namespace App;
 use Illuminate\Database\Eloquent\Model;
 
-class crud_admin extends Model
+
+class ortu extends Model
 {
-    //
-	protected $table = 'berita';
+	protected $table = 'orang_tua';
 	protected $primarykey = 'id';
-	protected $fillable = ['judul','berita', 'gambar'];
+	protected $fillable = ['nama_ibu', 
+	'alamat_ortu','id_user'];
 	public $timestamps = false;
 }
-
