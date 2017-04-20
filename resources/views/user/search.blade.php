@@ -3,9 +3,9 @@
 Landing page based on Pratt: http://blacktie.co/demo/pratt/
 -->
 <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-
 <html lang="en">
 <head>
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Adminlte-laravel - {{ trans('adminlte_lang::message.landingdescription') }} ">
@@ -32,9 +32,11 @@ Landing page based on Pratt: http://blacktie.co/demo/pratt/
 
     <!-- Custom styles for this template -->
     <link href="{{ asset('/css/main.css') }}" rel="stylesheet">
+    <link href="{{ asset('/css/bootstrap.css') }}" rel="stylesheet" type="text/css" />
 
     <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Raleway:400,300,700' rel='stylesheet' type='text/css'>
+    <link href="{{ asset('/css/AdminLTE.css') }}" rel="stylesheet" type="text/css" />
 
 	 <link href="{{ asset('/css/bootstrap.css') }}" rel="stylesheet" type="text/css" />
     <!-- Font Awesome Icons -->
@@ -42,36 +44,41 @@ Landing page based on Pratt: http://blacktie.co/demo/pratt/
     <!-- Ionicons -->
     <link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css" />
     <!-- Theme style -->
-    <link href="{{ asset('/css/AdminLTE.css') }}" rel="stylesheet" type="text/css" />
     <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
           page. However, you can choose any other skin. Make sure you
           apply the skin class to the body tag so the changes take effect.
     -->
 	<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 
-  <link rel="stylesheet" href="{{ asset('../../bootstrap/css/bootstrap.min.css') }}">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="{{ asset('../../dist/css/AdminLTE.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('css/AdminLTE.min.css') }}">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
-  <link rel="stylesheet" href="{{ asset('../../dist/css/skins/_all-skins.min.css') }}">
   <!-- bootstrap wysihtml5 - text editor -->
-  <link rel="stylesheet" href="{{ asset('../../plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css') }}">
     <link href="{{ asset('/css/skins/skin-blue.css') }}" rel="stylesheet" type="text/css" />
     <!-- iCheck -->
     <link href="{{ asset('/plugins/iCheck/square/blue.css') }}" rel="stylesheet" type="text/css" />
     <script src="{{ asset('/plugins/jQuery/jQuery-2.1.4.min.js') }}"></script>
     <script src="{{ asset('/js/smoothscroll.js') }}"></script>
-
-
+	<script>
+	$(document).on('ajaxComplete ready', function () {
+		$('.modalMd').off('click').on('click', function () {
+			$('#modalMdContent').load($(this).attr('value'));
+			var myBookId = $(this).data('id');
+			//alert($(this).data('id'));
+			$("#bebas").val($(this).data('id'));
+			$("#bebas1").val($(this).data('id'));
+	  $('#modalMdTitle').html($(this).attr('title'));
+		});
+	});
+	</script>
 </head>
-
 <body data-spy="scroll" data-offset="0" data-target="#navigation">
-
 <!-- Fixed navbar -->
 <div id="navigation" class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -120,7 +127,7 @@ Landing page based on Pratt: http://blacktie.co/demo/pratt/
     <div class="container">
         <div class="row centered">
            
-			<form action="{{ url('search_lowongan1') }}" method="GET">
+			<form action="{{ url('search_lowongan1', Auth::user()->id) }}" method="GET">
     <div class="row">
           <div class="box-body">
                 <div class="form-group" >
@@ -142,8 +149,6 @@ Landing page based on Pratt: http://blacktie.co/demo/pratt/
 	<section class="content">
       <div class="row">
         <div class="col-md-12">
-          <div class="box box-info">
-            <div class="box-header">
 
               <!-- /. tools -->
            
@@ -156,35 +161,31 @@ Landing page based on Pratt: http://blacktie.co/demo/pratt/
               <!-- /. tools -->
             </div>
             <!-- /.box-header -->
-            <div class="box-body pad">
-             <table id="example2" class="table table-bordered table-hover">
+             <table id="example2" class="table">
                 <thead>
                 <tr>
-                  <th>Lowongan</th>
-                  <th>katagori</th>
-                  <th>Kualifikasi</th>
+                  <th><h2>Lowongan</h2></th>
+                  <th><h2>Katagori</h2></th>
+                  <th><h2>Kualifikasi</h2></th>
                 </tr>
                 </thead>
 					@foreach($datas as $data)
 
-                <tbody>
+                <tbody align="justify">
                 <tr>
                   <td>{{ $data->lowongan }}
                   </td>
                   <td>  {{ $data->katagori }}</td>
                   <td>  {!! $data->kualifikasi !!}</td>
-                 
+                  <td>  {!! $data->id !!}</td>
+                  <td>
+						 <a href="#" title="Pilih CV untuk Apply lowongan ini" data-toggle="modal" data-target="#modalMd" ><span class="input-group-btn"><button  type="button" title="Pilih CV untuk Apply lowongan ini" class="btn btn-xs btn-info modalMd" data-toggle="modal" data-target="#modal-apply"   data-id="{{ $data->id }}">Apply<i class="fa fa-fw fa-check-circle"></i></button>
+					</span></a>
+				</td>
                 </tr>
                 </tbody>
-					@endforeach
-
-                <tfoot>
-                <tr>
-                  <th>Lowongan</th>
-                  <th>katagori</th>
-                  <th>Kualifikasi</th>
-                </tr>
-                </tfoot>
+			</form>
+				@endforeach
               </table>
 			  {{ $datas->render() }}
             </div>
@@ -194,7 +195,66 @@ Landing page based on Pratt: http://blacktie.co/demo/pratt/
       </div>
       <!-- ./row -->
     </section>
+ 	<div class="modal fade" id="modalMd" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+          <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                  <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                      <h4 class="modal-title" id="modalMdTitle"></h4>
+                  </div>
+                  <div class="modal-body">
+                      <div class="modalError"></div>
+					  <div id="modalMdContent">
+				<form>
+					<input type="radio" name="rad" id="rad1" value="1" class="rad"/> CV dari Sistem  
+					<input type="radio"  name="rad" id="rad2" value="2" class="rad"/> Upload Document CV (pdf|docx)
+					<!-- form yang mau ditampilkan-->
+					<div id="form1" style="display:none">
+				</form>
+				<form action="{{ url('lamaran1') }}" method="POST"  enctype="multipart/form-data">
+		                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+						<input name="id_user" type="hidden" value="{{Auth::user()->id}}"/>
+						<input name="id_lowongan" type="hidden" id="bebas" value=""/>
+						<input name="file_cv" type="hidden" value=""/>
+						<input name="status" type="hidden" value="Pending"/>
+						<input class="btn btn-block btn-primary"  type="submit" value="Submit"/>
 			
+
+				</form>
+					</div>
+					<div id="form2" style="display:none">
+			
+				  <form action="{{ url('lamaran') }}" method="POST"  enctype="multipart/form-data">
+                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+				<div class="input-field col s6">
+				Upload CV <br /> 
+						  <input class="validate"  name="file_cv" type="file"/> <br />
+      </div>
+				
+						  <input name="id_user" type="hidden" value="{{Auth::user()->id}}"/>
+						  <input name="id_lowongan" type="hidden" id="bebas" value=""/>
+						  <input name="status" type="hidden" value="Pending"/> <br />
+						<span class="input-group-btn">  <input class="btn btn-primary btn-block btn-flat" type="submit" value="Submit"/> </span>
+				</form>
+			</div>		
+		<script type="text/javascript">
+			$(function(){
+				$(":radio.rad").click(function(){
+					$("#form1, #form2").hide()
+					if($(this).val() == "1"){
+						$("#form1").show();
+						
+					}else{
+						$("#form2").show();
+					}
+				});
+		 	});
+		</script>
+					  </div>
+                  </div>
+              </div>
+          </div>
+        </div>
         </div>
         <br>
         <hr>

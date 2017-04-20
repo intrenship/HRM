@@ -66,7 +66,10 @@ Landing page based on Pratt: http://blacktie.co/demo/pratt/
     <link href="{{ asset('/plugins/iCheck/square/blue.css') }}" rel="stylesheet" type="text/css" />
     <script src="{{ asset('/plugins/jQuery/jQuery-2.1.4.min.js') }}"></script>
     <script src="{{ asset('/js/smoothscroll.js') }}"></script>
-
+<meta content="noindex, nofollow" name="robots">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<link href="{{asset('/css/style.css')}}" rel="stylesheet" type="text/css">
+<script src="{{asset('/js/multi_step_form.js')}}"></script>
 
 </head>
 
@@ -103,118 +106,186 @@ Landing page based on Pratt: http://blacktie.co/demo/pratt/
         </div><!--/.nav-collapse -->
     </div>
 </div>
-
-
-<section id="home" name="home"></section>
-<div id="headerwrap">
-    <div class="container">
-        <div class="row centered">
-            <h1><img src="{{ asset('/img/dios.png') }}" alt=""></h1>
-        </div>
-    </div> <!--/ .container -->
-</div><!--/ #headerwrap -->
-<section id="desc" name="desc"></section>
-<!-- INTRO WRAP -->
-
-<div id="intro">
-    <div class="container">
-        <div class="row centered">
-           
-			<form action="{{ url('search_lowongan1') }}" method="GET">
-    <div class="row">
-          <div class="box-body">
-                <div class="form-group" >
-				    <div class="col-md-3">
-					                <div class="input-group" >
-
-						<input type="text" name="q" class="form-control" placeholder="Search...">
-						<span class="input-group-btn">
-						<button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
-						</button>
-						</span>
-					</div>
-				</div>
-				</div>
-          </div>
-    </div>
- </form>
   
 	<section class="content">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="box box-info">
-            <div class="box-header">
-
-              <!-- /. tools -->
-           
+          <!-- Horizontal Form -->
+            
             <!-- /.box-header -->
-           
-          <!-- /.box -->
+            <!-- form start -->
+<!-- Multistep Form -->
+<div class="main">
 
-          <div class="box">
+<form action="{{ url('update_biodata',$users->id_user) }}" class="regform" method="POST" align="center">
+						@foreach($datas as $data1)
+	    {!! csrf_field() !!}
+
+<!-- Progress Bar -->
+<ul id="progressbar">
+<li class="active">Data Pribadi</li>
+<li>Pendidikan</li>
+<li>Ketrampilan</li>
+<li>Pengalaman Bekerja</li>
+<li>Data Orang </li>
+
+
+<fieldset id="first">
+<h2 class="title">Input Your Personal Data</h2>
+<p class="subtitle">Step 1</p>
+<label>No Ktp</label>
+<input class="text_field"  name="no_ktp" value="{{ $data1->no_ktp }}" readonly type="text">
+<label>Full Name</label>
+<input class="text_field"   name="nama" value="{{ $data1->nama }}" type="text">
+<label>Alamat Sekarang</label>
+<input class="text_field"    name="alamat" value="{{ $data1->alamat }}" type="text">
+<label>Alamat Ktp</label>
+<input class="text_field"   name="alamat_ktp" value="{{ $data1->alamat_ktp }}" type="text">
+<label>Agama</label>
+<select class="text_field"  name="agama" value="{{ $data1->agama }}"type="text"> 
+<option value="{{ $data1->agama }}">Pilih Agama
+</option>
+@foreach($biodata as $data)
+<option value="{{ $data->agama }}">{{ $data1->agama }}
+</option>
+@endforeach
+</select>
+<label>No Ktp</label>
+<select class="text_field"  name="jenis_kelamin" placeholder="jenis_kelamin" type="text"> 
+<option value="{{ $data1->jenis_kelamin }}">Pilih Jenis Kelamin
+</option>
+@foreach($jenis as $data)
+<option value="{{ $data->jenis_kelamin }}">{{ $data->jenis_kelamin }}
+</option>
+@endforeach
+</select>
+<label>Status Perkawinan</label>
+<select class="text_field" name="status_perkawinan" value="{{ $data1->no_ktp }}" type="text"> 
+<option value="">Pilih Status
+</option>
+@foreach($kawin as $data)
+<option value="{{ $data->status }}">{{ $data->status }}
+</option>
+@endforeach
+</select> 
+<label>Hobi</label>
+<input class="text_field" name="hobi" value="{{ $data1->hobi }}"type="text">
+<label>Suku</label>
+<input class="text_field"  name="suku" value="{{ $data1->suku }}" type="text">
+<label>No.Telp</label>
+<input class="text_field"  name="no_tlp" value="{{ $data1->no_tlp }}" type="text">
+<label>No.Hp</label>
+<input class="text_field"  name="no_hp" value="{{ $data1->no_hp }}" type="text">
+<label>No.SIM</label>
+<input class="text_field"  name="no_sim" value="{{ $data1->no_sim }}" type="text">
+<input class="next_btn" name="next" type="button" value="Next">
+</fieldset>
+<fieldset>
+<h2 class="title">Educational Profiles</h2>
+<p class="subtitle">Step 2</p>
+<label> Pendidikan Formal </label>
+<br />
+<select class="text_field" name="tingkat_pendidikan" value="{{ $data1->no_ktp }}" type="text"> 
+<option value="{{ $data1->tingkat_pendidikan }}">Pendidikan Terakhir
+</option>
+@foreach($jenjang as $data)
+<option value="{{ $data->jejang }}">{{ $data->jejang }}
+</option>
+@endforeach
+</select>
+<label>Jurusan</label>
+<select class="text_field" name="jurusan" placeholder="jenis_kelamin" type="text"> 
+<option value="{{ $data1->no_ktp }}">Jurusan
+</option>
+@foreach($jurusan as $data)
+<option value="{{ $data->jurusan }}">{{ $data->jurusan }}
+</option>
+@endforeach
+</select>
+<label>Sekolah/Universitas</label>
+<input class="text_field" id ="sekolah" name="sekolah" value="{{ $data1->sekolah }}" type="text">
+<label>Tahun Masuk</label>
+<input class="text_field"  id ="sekolah"  name="th_masuk" value="{{ $data1->th_masuk }}" type="text">
+<label>tahun Keluar</label>
+<input class="text_field"  id ="sekolah"  name="th_keluar" value="{{ $data1->th_keluar }}" type="text">
+<label> Pendidikan Non Formal </label>
+<br />
+<label>Jenis Pendidikan</label>
+<input class="text_field"  id ="sekolah"  name="jenis_pendidikan" value="{{ $data1->jenis_pendidikan }}" type="text">
+<label>Penyelengarah</label>
+<input class="text_field"  id ="sekolah"  name="penyelengara" value="{{ $data1->penyelengara }}" type="text">
+<label>Lama Pendidikan</label>
+<input class="text_field"  id ="sekolah"  name="durasi" value="{{ $data1->durasi }}" type="text">
+<label>Tahun Pendidikan</label>
+<input class="text_field"  id ="sekolah"  name="tahun" value="{{ $data1->tahun }}" type="text">
+<label> Pengalaman Organisasi </label>
+<label>Jenis Organisasi</label>
+<input class="text_field" id ="sekolah"  name="jenis" value="" type="text">
+<label> Nama_organisasi</label>
+<input class="text_field"  id ="sekolah"  name="nama_organisasi" value="" type="text">
+<label>Posisi</label>
+<input class="text_field" id ="sekolah"  name="posisi" value="" type="text">
+<label>Tahun</label>
+<input class="text_field" id ="sekolah"  name="tahun" value="" type="text">
+<input class="pre_btn" name="previous" type="button" value="Previous">
+<input class="next_btn" name="next" type="button" value="Next">
+</fieldset>
+<fieldset>
+<h3 class="title">Skills Mastered</h3>
+<p class="subtitle">Step 3</p>
+<label> Keterampilan </label>
+<label>Jenis Ketrampilan</label>
+<input class="text_field"   name="jenis" type="text" required >
+<table>
+<p>Tingkat Penguasaan</p>
+<tr>
+<td>
+<input class="text_field"   name="Tingkat" type="radio" value="Baik">Baik &nbsp;
+<input class="text_field"   name="Tingkat" type="radio" value="Cukup" checked>Cukup &nbsp;
+<input class="text_field"   name="Tingkat" type="radio" value="Kurang">Kurang &nbsp;
+</td>
+</table><input class="pre_btn" type="button" value="Previous">
+<input class="next_btn" name="next" type="button" value="Next">
+
+<!--<input class="submit_btn" type="submit" value="Submit">-->
+</fieldset>
+<fieldset>
+<h2 class="title">Jobs Experience</h2>
+<p class="subtitle">Step 4</p>
+<label> Pengalaman Kerja Terbaru </label>
+<input class="text_field"   name="jenis" placeholder="Jenis Ketrampilan" type="text" required >
+<table><tr>
+<td>
+<input class="text_field"  placeholder="nama_perusahaan"  name="nama_perusahaan" type="text" required >
+<input class="text_field"  placeholder="jabatan" name="jabatan" type="text" required  >
+<input class="text_field"  placeholder="Tahun Masuk" name="th_masuk" type="text" required >
+<input class="text_field"  placeholder="Tahun Keluar" name="th_keluar" type="text" required  >
+</td>
+</table><input class="pre_btn" type="button" value="Previous">
+<input class="next_btn" name="next" type="button" value="Next">
+</fieldset>
+
+<fieldset>
+<h2 class="title">Data Parent</h2>
+<p class="subtitle">Step 5</p>
+<label>Nama Ibu</label>
+<input class="text_field" name="nama_ibu" value="{{ $data1->nama_ibu }}" type="text">
+<label>Alamat Ibu</label>
+<input class="text_field" name="alamat_ortu" value="{{ $data1->alamat_ortu }}" type="text">
+<input class="text_field" name="id_user"  type="hidden" value="{{ Auth::user()->id }}">
+<input class="pre_btn" type="button" value="Previous">
+<input class="submit_btn" type="submit" value="Update">
+</fieldset>
+@endforeach
+
+</form>
+
+</div>
+</div>
+          </div>
+
+    </section>
             
               <!-- /. tools -->
-            </div>
             <!-- /.box-header -->
-            <div class="box-body pad">
-             <table id="example2" class="table table-bordered table-hover">
-                <thead>
-                <tr>
-                  <th><h2>Lowongan</h2></th>
-                  <th><h2>Katagori</h2></th>
-                  <th><h2>Kualifikasi</h2></th>
-                  <th><h2></h2></th>
-                </tr>
-                </thead>
-				@if (count($hasil))
-Hasil pencarian : <b>{{$query}}
-					@foreach($hasil as $data)
-                <tbody align="justify">
-                <tr>
-                  <td>{{ $data->lowongan }}
-                  </td>
-                  <td>  {{ $data->katagori }}</td>
-                  <td>  {!! $data->kualifikasi !!}</td>
-                 <td>  
-				 <form action="{{ url('') }}" method="post">
-				 			    {!! csrf_field() !!}
-
-				 @foreach($datas as $data1)
-				    <input name="id_user" type="hidden" value="{{ $data1->id_user }}">
-				    <input name="id_lowongan" type="hidden" value="{{ $data->id}}">
-				    <input name="status" type="hidden" value="Sedang diproses">
-					<div class="input-group">
-						<span class="input-group-btn"><button type="submit" class="btn btn-block btn-primary">Apply <i class="fa fa-fw fa-check-circle"></i></button>
-					</span>
-					</div>
-				</form>
-				 </td>
-                </tr>
-                </tbody>
-				
-				@endforeach
-					@endforeach
-				
-@else
-   <div class="card-panel red darken-3 white-text">Oops.. Data <b>{{$query}}</b> Tidak Ditemukan</div>
-@endif
-	
-               
-              </table>
-			  {{ $hasil->render() }}
-            </div>
-          </div>
-        </div>
-        <!-- /.col-->
-      </div>
-      <!-- ./row -->
-    </section>
-			
-        </div>
-        <br>
-        <hr>
-    </div> <!--/ .container -->
-</div><!--/ #introwrap -->
 
 <section id="contact" name="contact"></section>
 <div id="footerwrap">

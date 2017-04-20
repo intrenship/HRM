@@ -30,7 +30,7 @@
                 </tr>
                 </thead>
 				@if (count($hasil))
-Hasil pencarian : <b>{{$query}}
+				Hasil pencarian : <b>{{$query}}
 					@foreach($hasil as $data)
 
                 <tbody>
@@ -43,13 +43,10 @@ Hasil pencarian : <b>{{$query}}
                  <td><a href="{{ url('edit_users', $data->id) }}"><button type="button" class="btn btn-block btn-warning">Edit <i class="fa fa-edit"></i></button></a> <a href="{{ url('delete_user', $data->id) }}"><button type="button" class="btn btn-block btn-danger">Delete <i class="fa fa-fw fa-close"></i></button></a></td>
                 </tr>
                 </tbody>
-				
 					@endforeach
-				
-@else
-   <div class="card-panel red darken-3 white-text">Oops.. Data <b>{{$query}}</b> Tidak Ditemukan</div>
-@endif
-	
+				@else
+				<div class="card-panel red darken-3 white-text">Oops.. Data <b>{{$query}}</b> Tidak Ditemukan</div>
+				@endif
                 <tfoot>
                 <tr>
                  <th>User ID</th>
@@ -67,6 +64,8 @@ Hasil pencarian : <b>{{$query}}
  <div class="col-md-4">
 
 					<a href="#" onclick="history.back();"> <button type="submit" class="btn btn-block btn-primary">Back</button></a>   
+						
+				
 				</div>
             </div>
           </div>

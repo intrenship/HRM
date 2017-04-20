@@ -66,7 +66,10 @@ Landing page based on Pratt: http://blacktie.co/demo/pratt/
     <link href="{{ asset('/plugins/iCheck/square/blue.css') }}" rel="stylesheet" type="text/css" />
     <script src="{{ asset('/plugins/jQuery/jQuery-2.1.4.min.js') }}"></script>
     <script src="{{ asset('/js/smoothscroll.js') }}"></script>
-
+<meta content="noindex, nofollow" name="robots">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<link href="{{asset('/css/style.css')}}" rel="stylesheet" type="text/css">
+<script src="{{asset('/js/multi_step_form.js')}}"></script>
 
 </head>
 
@@ -103,118 +106,114 @@ Landing page based on Pratt: http://blacktie.co/demo/pratt/
         </div><!--/.nav-collapse -->
     </div>
 </div>
-
-
-<section id="home" name="home"></section>
-<div id="headerwrap">
-    <div class="container">
-        <div class="row centered">
-            <h1><img src="{{ asset('/img/dios.png') }}" alt=""></h1>
-        </div>
-    </div> <!--/ .container -->
-</div><!--/ #headerwrap -->
-<section id="desc" name="desc"></section>
-<!-- INTRO WRAP -->
-
-<div id="intro">
-    <div class="container">
-        <div class="row centered">
-           
-			<form action="{{ url('search_lowongan1') }}" method="GET">
+  
+          <!-- Horizontal Form -->
+            
+            <!-- /.box-header -->
+            <!-- form start -->
+<!-- Multistep Form -->
     <div class="row">
+    <div class="content">
           <div class="box-body">
                 <div class="form-group" >
-				    <div class="col-md-3">
-					                <div class="input-group" >
+				    <div class="col-md-10">
+					  <h3 >BIODATA {{ Auth::user()->name }}</H3>
 
-						<input type="text" name="q" class="form-control" placeholder="Search...">
-						<span class="input-group-btn">
-						<button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
-						</button>
-						</span>
-					</div>
-				</div>
-				</div>
-          </div>
-    </div>
- </form>
-  
-	<section class="content">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="box box-info">
-            <div class="box-header">
+<table  class="table table-bordered table-striped dataTable" role="grid" border="1">
+@foreach($datas as $data)
+</tr>
+<tr><td><label> Data Personal<td></label>
+</tr>
+<tr>
+<td>Nama  </td>
+<td>{{ $data->nama}}</td>
+</tr><tr>
+<td>Email  </td>
+<td>{{ $data->email}}</td>
+</tr><tr>
+<td>Alamat  </td>
+<td>{{ $data->alamat}}</td>
+</tr><tr>
+<td>Alamat Sesuai KTP  </td>
+<td>{{ $data->alamat_ktp}}</td>
+</tr><tr>
+<td>Agama  </td>
+<td>{{ $data->agama}}</td>
+</tr><tr>
+<td>Jenis Kelamin  </td>
+<td>{{ $data->jenis_kelamin}}</td>
+</tr><tr>
+<td>Hobi  </td>
+<td>{{ $data->hobi}}</td>
+</tr><tr>
+<td>Suku  </td>
+<td>{{ $data->suku}}</td>
+</tr><tr>
+<td>No.Telp  </td>
+<td>{{ $data->no_tlp}}</td>
+</tr><tr>
+<td>No.Hp  </td>
+<td>{{ $data->no_hp}}</td>
+</tr><tr>
+<td>No.SIM  </td>
+<td>{{ $data->no_sim}}</td>
+</tr>
+<tr><td><label> Pendidikan Formal<td></label>
+</tr>
+<tr>
+<td>Pendidikan Terakhir  </td>
+<td>{{ $data->tingkat_pendidikan}}</td>
+</tr><tr>
+<td>Jurusan  </td>
+<td>{{ $data->jurusan}}</td>
+</tr><tr>
+<td>Nama Sekolah/Universitas  </td>
+<td>{{ $data->sekolah}}</td>
+</tr><tr>
+<td>Tahun Masuk  </td>
+<td>{{ $data->th_masuk}}</td>
+</tr><tr>
+<td>Tahun Lulus  </td>
+<td>{{ $data->th_keluar}}</td>
+</tr><tr>
+<td>Nilai Terakhir/IPK </td>
+<td></td>
+</tr>
+<tr><td><label> Pendidikan Non Formal<td></label>
+</tr>
+<td>Jenis Penidikan Non Formal  </td>
+<td>{{ $data->jenis_pendidikan}}</td>
+</tr><tr>
+<td>Penyelengara  </td>
+<td>{{ $data->penyelengara}}</td>
+</tr><tr>
+<td>durasi  </td>
+<td>{{ $data->penyelengara}}</td>
+</tr><tr>
+<td>tahun  </td>
+<td>{{ $data->tahun}}</td>
+</tr>
+<tr><td><label> Data Orang Tua<td></label>
+</tr>
+<tr>
+<td>Nama Ibu Kandung  </td>
+<td>{{ $data->nama_ibu}}</td>
+</tr><tr>
+<td>Alamat Ibu  </td>
+<td>{{ $data->alamat_ortu}}</td>
+</tr>
+    <a href="{{ url('edit_biodata', $data->id_user) }}"><button  class="btn btn-large btn-success">Edit CV</button></a>
+	@endforeach
 
-              <!-- /. tools -->
-           
-            <!-- /.box-header -->
-           
-          <!-- /.box -->
+	</table>
+</div>
+</div>
+</div>
+</div>
 
-          <div class="box">
             
               <!-- /. tools -->
-            </div>
             <!-- /.box-header -->
-            <div class="box-body pad">
-             <table id="example2" class="table table-bordered table-hover">
-                <thead>
-                <tr>
-                  <th><h2>Lowongan</h2></th>
-                  <th><h2>Katagori</h2></th>
-                  <th><h2>Kualifikasi</h2></th>
-                  <th><h2></h2></th>
-                </tr>
-                </thead>
-				@if (count($hasil))
-Hasil pencarian : <b>{{$query}}
-					@foreach($hasil as $data)
-                <tbody align="justify">
-                <tr>
-                  <td>{{ $data->lowongan }}
-                  </td>
-                  <td>  {{ $data->katagori }}</td>
-                  <td>  {!! $data->kualifikasi !!}</td>
-                 <td>  
-				 <form action="{{ url('') }}" method="post">
-				 			    {!! csrf_field() !!}
-
-				 @foreach($datas as $data1)
-				    <input name="id_user" type="hidden" value="{{ $data1->id_user }}">
-				    <input name="id_lowongan" type="hidden" value="{{ $data->id}}">
-				    <input name="status" type="hidden" value="Sedang diproses">
-					<div class="input-group">
-						<span class="input-group-btn"><button type="submit" class="btn btn-block btn-primary">Apply <i class="fa fa-fw fa-check-circle"></i></button>
-					</span>
-					</div>
-				</form>
-				 </td>
-                </tr>
-                </tbody>
-				
-				@endforeach
-					@endforeach
-				
-@else
-   <div class="card-panel red darken-3 white-text">Oops.. Data <b>{{$query}}</b> Tidak Ditemukan</div>
-@endif
-	
-               
-              </table>
-			  {{ $hasil->render() }}
-            </div>
-          </div>
-        </div>
-        <!-- /.col-->
-      </div>
-      <!-- ./row -->
-    </section>
-			
-        </div>
-        <br>
-        <hr>
-    </div> <!--/ .container -->
-</div><!--/ #introwrap -->
 
 <section id="contact" name="contact"></section>
 <div id="footerwrap">

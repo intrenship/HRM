@@ -114,55 +114,164 @@ Landing page based on Pratt: http://blacktie.co/demo/pratt/
             <!-- form start -->
 <!-- Multistep Form -->
 <div class="main">
-<form action="" class="regform" method="post" align="center">
+<form action="{{ url('insert_biodata') }}" class="regform" method="POST" align="center">
+			    {!! csrf_field() !!}
 <!-- Progress Bar -->
 <ul id="progressbar">
 <li class="active">Data Pribadi</li>
 <li>Pendidikan</li>
-<li>Data Orang Tua</li>
+<li>Ketrampilan</li>
+<li>Pengalaman Bekerja</li>
+<li>Data Orang </li>
 </ul>
-<!-- Fieldsets -->
 <fieldset id="first">
-<h2 class="title">Create your account</h2>
+<h3 class="title">Input Your Personal Data</h3>
 <p class="subtitle">Step 1</p>
-<input class="text_field" name="email" placeholder="Email" type="text">
-<input class="text_field" name="pass" placeholder="Password" type="password">
-<input class="text_field" name="cpass" placeholder="Confirm Password" type="password">
+<input class="text_field"  	name="no_ktp" placeholder="No KTP" type="text" required >
+<input class="text_field"   name="nama" placeholder="Full Name" type="text" require >
+<input class="text_field"   name="alamat" placeholder="Alamat Tinggal" type="text" required >
+<input class="text_field"   name="alamat_ktp" placeholder="Alamat KTP" type="text" required >
+<input class="text_field"   name="email" placeholder="Email"type="text" required >
+<input class="text_field"   name="tinggi" placeholder="Tinggi Badan"type="text" required >
+<input class="text_field"   name="berat" placeholder="Berat Badan"type="text" required >
+<input class="text_field"   name="npwp" placeholder="No NPWP"type="text" required >
+<select class="text_field"  name="agama" placeholder="Agama" type="text" required > 
+<option value="">Pilih Agama
+</option>
+@foreach($biodata as $data)
+<option value="{{ $data->agama }}">{{ $data->agama }}
+</option>
+@endforeach
+</select>
+<table>
+<label>Jenis Kelamin</label>
+<tr>
+@foreach($jenis as $data)
+<td><input class="text_field" name="jenis_kelamin"  type="radio" value="{{ $data->jenis_kelamin }}" checked>{{ $data->jenis_kelamin }} &nbsp;</td>
+
+@endforeach
+</tr>
+</table>
+<table>
+<label> Status Pernikahan</label>
+
+<tr>
+
+@foreach($kawin as $data)
+<td><input class="text_field" name="status_perkawinan"  type="radio" value="{{ $data->status }}" checked>{{ $data->status }} &nbsp;</td>
+@endforeach
+</tr>
+</table>
+
+<input class="text_field" name="hobi" placeholder="hobi" type="text" required >
+<input class="text_field"  name="suku" placeholder="suku" type="text" required >
+<input class="text_field"  name="no_tlp" placeholder="no_tlp" type="text" required >
+<input class="text_field"  name="no_hp" placeholder="no_hp" type="text" required >
+<table>
+<tr>
+<label> Kendaraan</label>
+</tr>
+<tr>
+<td><input class="text_field" name="kendaraan" placeholder="" type="checkbox" value="Motor">Motor &nbsp </td>
+<td><input class="text_field" name="kendaraan" placeholder="" type="checkbox" value="Mobil">Mobil</td>
+<tr>
+</table>
+<table>
+<tr>
+<label> Memiliki Surat Izin Mengemudi(SIM)</label>
+</tr>
+<tr>
+<td><input class="text_field" name="sim" placeholder="" type="checkbox" value="A">A &nbsp </td>
+<td><input class="text_field" name="sim" placeholder="" type="checkbox" value="B">B &nbsp </td>
+<td><input class="text_field" name="sim" placeholder="" type="checkbox" value="B1">B1 &nbsp </td>
+<td><input class="text_field" name="sim" placeholder="" type="checkbox" value="B2">B2 &nbsp </td>
+<td><input class="text_field" name="sim" placeholder="" type="checkbox" value="B3">B3 &nbsp </td>
+<td><input class="text_field" name="sim" placeholder="" type="checkbox" value="C">C &nbsp </td>
+<tr>
+</table>
+<input class="text_field"  name="no_sim" placeholder="no_sim" type="text" requiered>
 <input class="next_btn" name="next" type="button" value="Next">
 </fieldset>
 <fieldset>
 <h2 class="title">Educational Profiles</h2>
 <p class="subtitle">Step 2</p>
-<select class="options">
-<option>--Select Education--</option>
-<option>Post Graduate</option>
-<option>Graduate</option>
-<option>HSC</option>
-<option>SSC</option>
+<label> Pendidikan Formal </label>
+<select class="text_field" name="tingkat_pendidikan" placeholder="jenis_kelamin" type="text"> 
+<option value="">Pendidikan Terakhir
+</option>
+@foreach($jenjang as $data)
+<option value="{{ $data->jejang }}">{{ $data->jejang }}
+</option>
+@endforeach
 </select>
-<input class="text_field" name="marks" placeholder="Marks Obtained" type="text">
-<input class="text_field" name="pyear" placeholder="Passing Year" type="text">
-<input class="text_field" name="univ" placeholder="University" type="text">
+<select class="text_field" name="jurusan" placeholder="jenis_kelamin" type="text" required > 
+<option value="">Jurusan
+</option>
+@foreach($jurusan as $data)
+<option value="{{ $data->jurusan }}">{{ $data->jurusan }}
+</option>
+@endforeach
+</select>
+<input class="text_field" id ="sekolah" name="sekolah" placeholder="masukan nama sekolah/universitas" type="text" required >
+<input class="text_field" id ="sekolah" name="kota" placeholder="Kota/Kabupaten" type="text" required >
+<input class="text_field"  id ="sekolah"  name="th_masuk" placeholder="Tahun masuk" type="text" required >
+<input class="text_field"  id ="sekolah"  name="th_keluar" placeholder="Tahun keluar" type="text" required >
+<label> Pengalaman Organisasi </label>
+<input class="text_field" id ="sekolah"  name="jenis" placeholder="Jenis Organisasi" type="text" >
+<input class="text_field"  id ="sekolah"  name="nama_organisasi" placeholder="Nama Organisasi" type="text">
+<input class="text_field" id ="sekolah"  name="kota" placeholder="Kota/kabupaten" type="text">
+<input class="text_field" id ="sekolah"  name="posisi" placeholder="Posisi" type="text">
+<input class="text_field" id ="sekolah"  name="tahun" placeholder="Tahun" type="text">
 <input class="pre_btn" name="previous" type="button" value="Previous">
 <input class="next_btn" name="next" type="button" value="Next">
 </fieldset>
 <fieldset>
-<h2 class="title">Personal Details</h2>
+<h3 class="title">Skills Mastered</h3>
 <p class="subtitle">Step 3</p>
-<input class="text_field" name="fname" placeholder="First Name" type="text">
-<input class="text_field" name="lname" placeholder="Last Name" type="text">
-<input class="text_field" name="cont" placeholder="Contact" type="text">
-<label>Gender</label>
-<input class="rad" name="gender" type="radio">Male
-<input class="rad" name="gender" type="radio">Female
-<textarea name="address" placeholder="Address"></textarea>
+<label> Keterampilan </label>
+<input class="text_field"   name="jenis" placeholder="Jenis Ketrampilan" type="text" required >
+<table>
+<p>Tingkat Penguasaan</p>
+<tr>
+<td>
+<input class="text_field"   name="Tingkat" type="radio" value="Baik">Baik &nbsp;
+<input class="text_field"   name="Tingkat" type="radio" value="Cukup" checked>Cukup &nbsp;
+<input class="text_field"   name="Tingkat" type="radio" value="Kurang">Kurang &nbsp;
+</td>
+</table><input class="pre_btn" type="button" value="Previous">
+<input class="next_btn" name="next" type="button" value="Next">
+
+<!--<input class="submit_btn" type="submit" value="Submit">-->
+</fieldset>
+<fieldset>
+<h2 class="title">Jobs Experience</h2>
+<p class="subtitle">Step 4</p>
+<label> Pengalaman Kerja Terbaru </label>
+<input class="text_field"   name="jenis" placeholder="Jenis Ketrampilan" type="text" required >
+<table><tr>
+<td>
+<input class="text_field"  placeholder="nama_perusahaan"  name="nama_perusahaan" type="text" required >
+<input class="text_field"  placeholder="jabatan" name="jabatan" type="text" required  >
+<input class="text_field"  placeholder="Tahun Masuk" name="th_masuk" type="text" required >
+<input class="text_field"  placeholder="Tahun Keluar" name="th_keluar" type="text" required  >
+</td>
+</table><input class="pre_btn" type="button" value="Previous">
+<input class="next_btn" name="next" type="button" value="Next">
+</fieldset>
+<fieldset>
+<h2 class="title">Data Parent</h2>
+<p class="subtitle">Step 5</p>
+<input class="text_field" name="nama_ibu" placeholder="Masukan Nama Ibu" type="text" required >
+<input class="text_field" name="alamat_ortu" placeholder="Alamat ibu" type="text" requiered>
+<input class="form-control pull-right text_field" id="datepicker" name="tggl_lahir" placeholder="Tanggal Lahir Ibu" type="text" required >
+<input class="text_field" name="pekerjaan" placeholder="Pekerjaan" type="text" required >
+<input class="text_field" name="id_user"  type="hidden" value="{{ Auth::user()->id }}">
 <input class="pre_btn" type="button" value="Previous">
 <input class="submit_btn" type="submit" value="Submit">
 </fieldset>
 </form>
 </div>
 </div>
-            <!-- /.box-body -->
           </div>
 
     </section>
