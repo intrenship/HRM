@@ -20,6 +20,8 @@ Landing page based on Pratt: http://blacktie.co/demo/pratt/
     <meta property="og:image" content="http://demo.adminlte.acacha.org/img/AcachaAdminLTE600x314.png" />
     <meta property="og:sitename" content="demo.adminlte.acacha.org" />
     <meta property="og:url" content="http://demo.adminlte.acacha.org" />
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@acachawiki" />
@@ -107,18 +109,23 @@ Landing page based on Pratt: http://blacktie.co/demo/pratt/
     </div>
 </div>
   
+	<section class="content">
           <!-- Horizontal Form -->
             
             <!-- /.box-header -->
             <!-- form start -->
 <!-- Multistep Form -->
-    <div class="row">
+<div class="main">
+<form action="{{ url('insert_biodata1') }}" class="regform" method="POST" align="center">
+			    {!! csrf_field() !!}
+ <div class="row">
     <div class="content">
           <div class="box-body">
                 <div class="form-group" >
 				    <div class="col-md-12">
+				        <div class="input-group control-group after-add-more">
 
-	<table  align="center">
+		<table  align="center">
 	<tr> 
 		<td>
 		<div class="col-lg-8">
@@ -138,186 +145,101 @@ Landing page based on Pratt: http://blacktie.co/demo/pratt/
 	<br />
 <div class="box-body">
 <table  class="table table-bordered" role="grid" border="3">
-@foreach($datas as $data)
 <tr>
 <th colspan="4"> <p align="center">FORM PENERIMAAN <br /> CALON KARYAWAN BARU<p></th>
 <th colspan="7" > <br /> Tanggal : {{date('d-m-Y')}}<br /> Tempat :</th>
-</tr>
-<tr>
-<td colspan="7"><p align="center"> <b>A. DATA  PRIBADI</b> </p>
-</td>
-</tr>
-<tr>
-<td>Nama  </td>
-<td colspan="6">{{ $data->nama}}</td>
-</tr><tr>
-<td >Email  </td>
-<td colspan="6">{{ Auth::user()->email }}</td>
-</tr><tr>
-<td>Alamat  </td>
-<td  colspan="6"> {{ $data->alamat}}</td>
-</tr><tr>
-<td>Alamat Sesuai KTP  </td>
-<td colspan="6"> {{ $data->alamat_ktp}}</td>
-</tr><tr>
-<td>Agama  </td>
-<td colspan="6">{{ $data->agama}}</td>
-</tr><tr>
-<td>Jenis Kelamin  </td>
-<td >{{ $data->jenis_kelamin}}</td>
-<td>Hobi  </td>
-<td colspan="6">{{ $data->hobi}}</td>
-</tr><tr>
-<td>Suku  </td>
-<td colspan="6">{{ $data->suku}}</td>
-</tr><tr>
-<td>No.Telp  </td>
-<td >{{ $data->no_tlp}}</td>
-<td>No.Hp  </td>
-<td colspan="4">{{ $data->no_hp}}</td>
-</tr><tr>
-<td>No.SIM  </td>
-<td colspan="6">{{ $data->no_sim}}</td>
 </tr>
 <tr><td colspan="7"><p align="center"><label> B.Data Keluarga </p></label></td>
 </tr>
 <tr>
 <td>Anak Ke </td>
-<td >{{ $data->anak_ke}}</td>
+<td ><input class="text_field"   name="anak_ke" value="" type="text"></td>
 <td>Dari Berapa saudara  </td>
-<td colspan="6">{{ $data->saudara}}</td>
+<td colspan="6"><input class="text_field"  name="saudara" value="" type="text"></td>
 </tr>
 <tr>
 <td>Nama Ayah Kandung </td>
-<td >{{ $data->nama_ayah}}</td>
+<td ><input class="text_field"   name="nama_ayah" value="" type="text"></td>
 <td>TTL:  </td>
-<td >{{ $data->tgl_lahir_ayah}}</td>
-<td>Pekerjaan:  </td>
-<td colspan="6">{{ $data->pekerjaan_ayah}}</td>
+<td ><input class="date-range-picker" name="tgl_lahir_ayah" type="date"></td>
+<td>Pekerjaan Ayah:  </td>
+<td colspan="6"><input class="text_field"   name="pekerjaan_ayah" value="" type="text"></td>
 </tr>
 <tr>
 <td>Nama Ibu Kandung </td>
-<td >{{ $data->nama_ibu}}</td>
+<td ><input class="text_field"   name="nama_ibu" value="" type="text"></td>
 <td>TTL:  </td>
-<td >{{ $data->tgl_lahir_ibu}}</td>
-<td>Pekerjaan:  </td>
-<td colspan="6">{{ $data->pekerjaan}}</td>
+<td ><input   class="date-range-picker" name="tgl_lahir_ibu" type="date"></td>
+<td>Pekerjaan Ibu:  </td>
+<td colspan="6"><input class="text_field"  name="pekerjaan" value="" type="text"></td>
 </tr>
-<tr>
-<td>Saudara/i</td>
-<td >{{ $data->saudara_i}}</td>
-<td>TTL:  </td>
-<td ></td>
-<td>Pekerjaan/Sekolah  </td>
-<td colspan="6"></td>
-</tr>
-<tr>
-<td colspan="7"><p align="center"><label> C. DATA PENDIDIKAN DAN WAWASAN </p></label></td></label>
-</tr>
-<tr>
-<td colspan="7">Pendidikan Formal</td>
-</tr>
-<tr>
-
-</tr>
-
-<tr>
-<td>Pendidikan Terakhir  </td>
-<td colspan="6">{{ $data->tingkat_pendidikan}}</td>
-</tr><tr>
-<td>Jurusan  </td>
-<td>{{ $data->jurusan}}</td>
-<td>Nama Sekolah/Universitas  </td>
-<td colspan="6"> {{ $data->sekolah}}</td>
-</tr><tr>
-<td>Tahun Masuk  </td>
-<td >{{ $data->th_masuk}}</td>
-<td>Tahun Lulus  </td>
-<td colspan="6">{{ $data->th_keluar}}</td>
-</tr><tr>
-<td >Nilai Terakhir/IPK </td>
-<td colspan="6">{{ $data->IPK}}</td>
-</tr>
-<tr><td colspan="7">Pendidikan Non </td>
-</tr>
-<td>Jenis Penidikan Non Formal  </td>
-<td colspan="6">{{ $data->jenis_pendidikan}}</td>
-</tr><tr>
-<td>Penyelengara  </td>
-<td colspan="6">{{ $data->penyelengara}}</td>
-</tr><tr>
-<td>durasi  </td>
-<td colspan="6">{{ $data->penyelengara}}</td>
-</tr><tr>
-<td>tahun  </td>
-<td colspan="6">{{ $data->tahun}}</td>
-</tr>
-<tr>
-<td colspan="7">Pengalaman Organisasi</td>
-</tr>
-<tr>
-<td>Jenjang </td>
-<td>Nama Organisasi</td>
-<td>kota tinggal Organisasi</td>
-<td>Jabatan</td>
-<td>Tahun Keluar</td>
-<td colspan="6">IPK</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td colspan="6"></td>
-</tr>
-<tr>
-
-<td colspan="7"> Pengalaman Bekerja</td>
-</tr>
-<tr>
-<td rowspan="2">Nama Perusahaan</td>
-<td rowspan="2">Jabatan</td>
-<td colspan="2">Tahun</td>
-<td rowspan="2">Alasan Berhenti</td>
-<td rowspan="2" colspan="6" >Gaji Terakhir</td>
-</tr>
-<tr>
-<td >Tahun Masuk  </td>
-<td >Tahun Keluar</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td colspan="6"></td>
-</tr>
-<tr>
-<td colspan="7"><p align="center">D. DATA  MINAT DAN KONSEP DIRI</p></td>
-</tr>
-<tr>
-<td colspan="6"></td>
-</tr>
-<tr>
-	@endforeach
-
+<input class="text_field" name="id_user"  type="hidden" value="{{ Auth::user()->id }}">
 <td colspan="7">
-    <a href="{{ url('edit_biodata', $data->id_user) }}"><button  class="btn btn-large btn-success">Edit CV</button></a>
-</td>
-</tr>	
-
+<td>
+</tr>
 	</table>
-</div>
-</div>
-</div>
-</div>
-</div>
+		  <table class="table table-bordered" role="grid" border="3" name="addmore[]">
+			<tr>
+			<input class="text_field" name="id_user"  type="hidden" value="{{ Auth::user()->id }}">
 
+			<td>Saudara/i</td>
+			<td ><input class="text_field"  name="saudara_i" value="" type="text"></td>
+			<td>TTL:  </td>
+			<td ><input class="text_field" class="date-range-picker" value=""  name="tgl_lahir" type="date"></td>
+			<td>Pekerjaan/Sekolah  </td>
+			<td colspan="6"><input class="text_field"  name="pekerjaan" value="" type="text"></td>
+			
+          <div class="input-group-btn"> 
+		   <td><button class="btn btn-success add-more" type="button"><i class="glyphicon glyphicon-plus"></i> Add</button>
+			</td>
+			</tr>
+			</table>
+           
+          </div>
+        </div>
+        <div class="control-group text-center">
+            <br>
+<input class="submit_btn" type="submit" value="Next">
+
+			</div>
+        <!-- Copy Fields -->
+        <div class="copy hide">
+          <div class="control-group input-group" style="margin-top:10px">
+		  
+			  <table class="table table-bordered" role="grid" border="3" name="addmore[]">
+			<tr>
+			<td>Saudara/i</td>
+			<td ><input class="text_field"  name="saudara_i" value="" type="text"></td>
+			<td>TTL:  </td>
+			<td ><input class="text_field" class="date-range-picker" value=""  name="tgl_lahir" type="date"></td>
+			<td>Pekerjaan/Sekolah  </td>
+			<td colspan="6"><input class="text_field"  name="pekerjaan" value="" type="text"></td>
+			
+          <div class="input-group-btn"> 
+		  
+		
+            <div class="input-group-btn"> 
+             <td> 
+			 <button class="btn btn-danger remove" type="button"><i class="glyphicon glyphicon-remove"></i> Remove</button>
+			</td>
+			</div>
+			</tr>
+				</table>
+          </div>
+        </div>
+  </div>
+</div>
+	
+
+</form>
+</div>
+</div>
+          </div>
+
+    </section>
             
               <!-- /. tools -->
-            <!-- /.box-header -->
+            <!-- /.box-header-->
 
 <section id="contact" name="contact"></section>
 <div id="footerwrap">
@@ -369,6 +291,23 @@ Landing page based on Pratt: http://blacktie.co/demo/pratt/
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="{{ asset('/js/bootstrap.min.js') }}" type="text/javascript"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+      $(".add-more").click(function(){ 
+          var html = $(".copy").html();
+          $(".after-add-more").after(html);
+      });
+      $("body").on("click",".remove",function(){ 
+          $(this).parents(".control-group").remove();
+      });
+    });
+</script>
+<script src="{{ asset('/js/bootstrap.min.js') }}" type="text/javascript"></script>
+<script>
+    $('.carousel').carousel({
+        interval: 3500
+    })
+</script>
 <script>
     $('.carousel').carousel({
         interval: 3500

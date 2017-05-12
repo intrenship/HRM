@@ -47,20 +47,20 @@ Landing page based on Pratt: http://blacktie.co/demo/pratt/
           page. However, you can choose any other skin. Make sure you
           apply the skin class to the body tag so the changes take effect.
     -->
-	<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+ <link rel="stylesheet" href="{{asset('/plugins/datepicker/datepicker3.css')}}">
 
-  <link rel="stylesheet" href="{{ asset('../../bootstrap/css/bootstrap.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('/css/bootstrap.css') }}">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="{{ asset('../../dist/css/AdminLTE.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('/css/AdminLTE.min.css') }}">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
-  <link rel="stylesheet" href="{{ asset('../../dist/css/skins/_all-skins.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('/css/skins/_all-skins.min.css') }}">
   <!-- bootstrap wysihtml5 - text editor -->
-  <link rel="stylesheet" href="{{ asset('../../plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css') }}">
     <link href="{{ asset('/css/skins/skin-blue.css') }}" rel="stylesheet" type="text/css" />
     <!-- iCheck -->
     <link href="{{ asset('/plugins/iCheck/square/blue.css') }}" rel="stylesheet" type="text/css" />
@@ -70,6 +70,38 @@ Landing page based on Pratt: http://blacktie.co/demo/pratt/
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <link href="{{asset('/css/style.css')}}" rel="stylesheet" type="text/css">
 <script src="{{asset('/js/multi_step_form.js')}}"></script>
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="{{asset('/plugins/datepicker/bootstrap-datepicker.js')}}"></script>
+
+<!-- jQuery 2.2.3 -->
+<script src="{{asset('/plugins/jQuery/jquery-2.2.3.min.js')}}"></script>
+<!-- Bootstrap 3.3.6 -->
+<script src="{{asset('//bootstrap/js/bootstrap.min.js')}}"></script>
+<!-- Select2 -->
+<script src="{{asset('/plugins/select2/select2.full.min.js')}}"></script>
+<!-- InputMask -->
+<script src="{{asset('/plugins/input-mask/jquery.inputmask.js')}}"></script>
+<script src="{{asset('/plugins/input-mask/jquery.inputmask.date.extensions.js')}}"></script>
+<script src="{{asset('/plugins/input-mask/jquery.inputmask.extensions.js')}}"></script>
+<!-- date-range-picker -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
+<script src="{{asset('/plugins/daterangepicker/daterangepicker.js')}}"></script>
+<!-- bootstrap datepicker -->
+<script src="{{asset('/plugins/datepicker/bootstrap-datepicker.js')}}"></script>
+<!-- bootstrap color picker -->
+<script src="{{asset('/plugins/colorpicker/bootstrap-colorpicker.min.js')}}"></script>
+<!-- bootstrap time picker -->
+<script src="{{asset('/plugins/timepicker/bootstrap-timepicker.min.js')}}"></script>
+<!-- SlimScroll 1.3.0 -->
+<script src="{{asset('/plugins/slimScroll/jquery.slimscroll.min.js')}}"></script>
+<!-- iCheck 1.0.1 -->
+<script src="{{asset('/plugins/iCheck/icheck.min.js')}}"></script>
+<!-- FastClick -->
+<script src="{{asset('/plugins/fastclick/fastclick.js')}}"></script>
+<!-- AdminLTE App -->
+<script src="{{asset('/js/app.min.js')}}"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="{{asset('/js/demo.js')}}"></script>
 
 </head>
 
@@ -114,166 +146,219 @@ Landing page based on Pratt: http://blacktie.co/demo/pratt/
             <!-- form start -->
 <!-- Multistep Form -->
 <div class="main">
+<div class="row">
+    <div class="content">
+          <div class="box-body">
+                <div class="form-group" >
+				    <div class="col-md-12">
 
 <form action="{{ url('update_biodata',$users->id_user) }}" class="regform" method="POST" align="center">
 						@foreach($datas as $data1)
 	    {!! csrf_field() !!}
 
-<!-- Progress Bar -->
-<ul id="progressbar">
-<li class="active">Data Pribadi</li>
-<li>Pendidikan</li>
-<li>Ketrampilan</li>
-<li>Pengalaman Bekerja</li>
-<li>Data Orang </li>
-
-
-<fieldset id="first">
-<h2 class="title">Input Your Personal Data</h2>
-<p class="subtitle">Step 1</p>
-<label>No Ktp</label>
-<input class="text_field"  name="no_ktp" value="{{ $data1->no_ktp }}" readonly type="text">
-<label>Full Name</label>
-<input class="text_field"   name="nama" value="{{ $data1->nama }}" type="text">
-<label>Alamat Sekarang</label>
-<input class="text_field"    name="alamat" value="{{ $data1->alamat }}" type="text">
-<label>Alamat Ktp</label>
-<input class="text_field"   name="alamat_ktp" value="{{ $data1->alamat_ktp }}" type="text">
-<label>Agama</label>
-<select class="text_field"  name="agama" value="{{ $data1->agama }}"type="text"> 
-<option value="{{ $data1->agama }}">Pilih Agama
-</option>
-@foreach($biodata as $data)
-<option value="{{ $data->agama }}">{{ $data1->agama }}
-</option>
-@endforeach
-</select>
-<label>No Ktp</label>
-<select class="text_field"  name="jenis_kelamin" placeholder="jenis_kelamin" type="text"> 
-<option value="{{ $data1->jenis_kelamin }}">Pilih Jenis Kelamin
-</option>
-@foreach($jenis as $data)
-<option value="{{ $data->jenis_kelamin }}">{{ $data->jenis_kelamin }}
-</option>
-@endforeach
-</select>
-<label>Status Perkawinan</label>
-<select class="text_field" name="status_perkawinan" value="{{ $data1->no_ktp }}" type="text"> 
-<option value="">Pilih Status
-</option>
-@foreach($kawin as $data)
-<option value="{{ $data->status }}">{{ $data->status }}
-</option>
-@endforeach
-</select> 
-<label>Hobi</label>
-<input class="text_field" name="hobi" value="{{ $data1->hobi }}"type="text">
-<label>Suku</label>
-<input class="text_field"  name="suku" value="{{ $data1->suku }}" type="text">
-<label>No.Telp</label>
-<input class="text_field"  name="no_tlp" value="{{ $data1->no_tlp }}" type="text">
-<label>No.Hp</label>
-<input class="text_field"  name="no_hp" value="{{ $data1->no_hp }}" type="text">
-<label>No.SIM</label>
-<input class="text_field"  name="no_sim" value="{{ $data1->no_sim }}" type="text">
-<input class="next_btn" name="next" type="button" value="Next">
-</fieldset>
-<fieldset>
-<h2 class="title">Educational Profiles</h2>
-<p class="subtitle">Step 2</p>
-<label> Pendidikan Formal </label>
-<br />
-<select class="text_field" name="tingkat_pendidikan" value="{{ $data1->no_ktp }}" type="text"> 
-<option value="{{ $data1->tingkat_pendidikan }}">Pendidikan Terakhir
-</option>
-@foreach($jenjang as $data)
-<option value="{{ $data->jejang }}">{{ $data->jejang }}
-</option>
-@endforeach
-</select>
-<label>Jurusan</label>
-<select class="text_field" name="jurusan" placeholder="jenis_kelamin" type="text"> 
-<option value="{{ $data1->no_ktp }}">Jurusan
-</option>
-@foreach($jurusan as $data)
-<option value="{{ $data->jurusan }}">{{ $data->jurusan }}
-</option>
-@endforeach
-</select>
-<label>Sekolah/Universitas</label>
-<input class="text_field" id ="sekolah" name="sekolah" value="{{ $data1->sekolah }}" type="text">
-<label>Tahun Masuk</label>
-<input class="text_field"  id ="sekolah"  name="th_masuk" value="{{ $data1->th_masuk }}" type="text">
-<label>tahun Keluar</label>
-<input class="text_field"  id ="sekolah"  name="th_keluar" value="{{ $data1->th_keluar }}" type="text">
-<label> Pendidikan Non Formal </label>
-<br />
-<label>Jenis Pendidikan</label>
-<input class="text_field"  id ="sekolah"  name="jenis_pendidikan" value="{{ $data1->jenis_pendidikan }}" type="text">
-<label>Penyelengarah</label>
-<input class="text_field"  id ="sekolah"  name="penyelengara" value="{{ $data1->penyelengara }}" type="text">
-<label>Lama Pendidikan</label>
-<input class="text_field"  id ="sekolah"  name="durasi" value="{{ $data1->durasi }}" type="text">
-<label>Tahun Pendidikan</label>
-<input class="text_field"  id ="sekolah"  name="tahun" value="{{ $data1->tahun }}" type="text">
-<label> Pengalaman Organisasi </label>
-<label>Jenis Organisasi</label>
-<input class="text_field" id ="sekolah"  name="jenis" value="" type="text">
-<label> Nama_organisasi</label>
-<input class="text_field"  id ="sekolah"  name="nama_organisasi" value="" type="text">
-<label>Posisi</label>
-<input class="text_field" id ="sekolah"  name="posisi" value="" type="text">
-<label>Tahun</label>
-<input class="text_field" id ="sekolah"  name="tahun" value="" type="text">
-<input class="pre_btn" name="previous" type="button" value="Previous">
-<input class="next_btn" name="next" type="button" value="Next">
-</fieldset>
-<fieldset>
-<h3 class="title">Skills Mastered</h3>
-<p class="subtitle">Step 3</p>
-<label> Keterampilan </label>
-<label>Jenis Ketrampilan</label>
-<input class="text_field"   name="jenis" type="text" required >
-<table>
-<p>Tingkat Penguasaan</p>
+	<table  align="center">
+	<tr> 
+		<td>
+		<div class="col-lg-8">
+		<img class="img-responsive" src="{{ asset('/img/dios.png') }}">
+		</div>
+		</div>
+		</div>
+		</div>
+</td>
+		<td> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  </td>
+		<td> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  </td>
+		<td> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  </td>
+		<td> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  </td>
+		<td> <h4><b>Digital Oasis <br/> (PT.Pilar Timur Teknologi)</b></h4>Jl.Unpar III No.3 Sukawarna. Bandung <br /> Email : hrd@digitaloasis.co.id <br /> Website : www.digitaloasis.co.id</td>
+	</tr>
+	</table>
+	<br />
+<div class="box-body">
+<table  class="table table-bordered" role="grid" border="3">
+@foreach($datas as $data)
 <tr>
-<td>
-<input class="text_field"   name="Tingkat" type="radio" value="Baik">Baik &nbsp;
-<input class="text_field"   name="Tingkat" type="radio" value="Cukup" checked>Cukup &nbsp;
-<input class="text_field"   name="Tingkat" type="radio" value="Kurang">Kurang &nbsp;
+<th colspan="4"> <p align="center">FORM PENERIMAAN <br /> CALON KARYAWAN BARU<p></th>
+<th colspan="7" > <br /> Tanggal : {{date('d-m-Y')}}<br /> Tempat :</th>
+</tr>
+<tr>
+<td colspan="7"><p align="center"> <b>A. DATA  PRIBADI</b> </p>
 </td>
-</table><input class="pre_btn" type="button" value="Previous">
-<input class="next_btn" name="next" type="button" value="Next">
-
-<!--<input class="submit_btn" type="submit" value="Submit">-->
-</fieldset>
-<fieldset>
-<h2 class="title">Jobs Experience</h2>
-<p class="subtitle">Step 4</p>
-<label> Pengalaman Kerja Terbaru </label>
-<input class="text_field"   name="jenis" placeholder="Jenis Ketrampilan" type="text" required >
-<table><tr>
-<td>
-<input class="text_field"  placeholder="nama_perusahaan"  name="nama_perusahaan" type="text" required >
-<input class="text_field"  placeholder="jabatan" name="jabatan" type="text" required  >
-<input class="text_field"  placeholder="Tahun Masuk" name="th_masuk" type="text" required >
-<input class="text_field"  placeholder="Tahun Keluar" name="th_keluar" type="text" required  >
+</tr>
+<tr>
+<td>No.KTP</td>
+<td colspan="6">
+<input class="text_field"  name="no_ktp" value="{{ $data1->no_ktp }}" readonly type="text">
 </td>
-</table><input class="pre_btn" type="button" value="Previous">
-<input class="next_btn" name="next" type="button" value="Next">
-</fieldset>
+</tr>
+<tr>
 
-<fieldset>
-<h2 class="title">Data Parent</h2>
-<p class="subtitle">Step 5</p>
-<label>Nama Ibu</label>
-<input class="text_field" name="nama_ibu" value="{{ $data1->nama_ibu }}" type="text">
-<label>Alamat Ibu</label>
-<input class="text_field" name="alamat_ortu" value="{{ $data1->alamat_ortu }}" type="text">
-<input class="text_field" name="id_user"  type="hidden" value="{{ Auth::user()->id }}">
-<input class="pre_btn" type="button" value="Previous">
+<td>Nama  </td>
+<td colspan="6"><input class="text_field"  name="nama" value="{{ $data->nama}}" type="text"></td>
+</tr><tr>
+<td >Email  </td>
+<td colspan="6"><input class="text_field"  name="email" value="{{ Auth::user()->email }}" type="text"></td>
+</tr><tr>
+<td>Alamat  </td>
+<td  colspan="6"><input class="text_field"  name="nama" value="{{ $data->alamat}}" type="text"> </td>
+</tr><tr>
+<td>Alamat Sesuai KTP  </td>
+<td colspan="6"><input class="text_field"  name="alamat_ktp" value="{{ $data->alamat_ktp}}" type="text"> </td>
+</tr><tr>
+<td>Agama  </td>
+<td colspan="6"><input class="text_field"  name="agama" value="{{ $data->agama}}" type="text"></td>
+</tr><tr>
+<td>Jenis Kelamin  </td>
+<td ><input class="text_field"  name="jenis_kelamin" value="{{ $data->jenis_kelamin}}" type="text"></td>
+<td>Hobi  </td>
+<td colspan="6"><input class="text_field"  name="hobi" value="{{  $data->hobi }}" type="text"></td>
+</tr><tr>
+<td>Suku  </td>
+<td colspan="6"><input class="text_field"  name="suku" value="{{ $data->suku}}" type="text"></td>
+</tr><tr>
+<td>No.Telp  </td>
+<td ><input class="text_field"  name="no_tlp" value="{{ $data->no_tlp}}" type="text"></td>
+<td>No.Hp  </td>
+<td colspan="4"><input class="text_field"  name="no_hp" value="{{ $data->no_hp}}" type="text"> </td>
+</tr><tr>
+<td>No.SIM  </td>
+<td colspan="6"><input class="text_field"  name="no_sim" value="{{ $data->no_sim}}" type="text"></td>
+</tr>
+<tr><td colspan="7"><p align="center"><label> B.Data Keluarga </p></label></td>
+</tr>
+<tr>
+<td>Anak Ke </td>
+<td ><input class="text_field"   name="pekerjaan_ayah" value="{{ Auth::user()->email }}" type="text"></td>
+<td>Dari Berapa saudara  </td>
+<td colspan="6"><input class="text_field"  name="saudara" value="" type="text"></td>
+</tr>
+<tr>
+<td>Nama Ayah Kandung </td>
+<td ><input class="text_field"   name="pekerjaan_ayah" value="{{ Auth::user()->email }}" type="text"></td>
+<td>TTL:  </td>
+<td ><input name="nama" class="date-range-picker" type="date"></td>
+<td>Pekerjaan Ayah:  </td>
+<td colspan="6"><input class="text_field"   name="pekerjaan_ayah" value="{{ Auth::user()->email }}" type="text"></td>
+</tr>
+<tr>
+<td>Nama Ibu Kandung </td>
+<td ><input class="text_field"   name="pekerjaan_ayah" value="{{ Auth::user()->email }}" type="text"></td>
+<td>TTL:  </td>
+<td ><input  name="nama" class="date-range-picker" type="date"></td>
+<td>Pekerjaan Ibu:  </td>
+<td colspan="6"><input class="text_field"  name="pekerjaan" value="" type="text"></td>
+</tr>
+<tr>
+<td>Saudara/i</td>
+<td ><input class="text_field"  name="nama_saudara" value="{{ Auth::user()->email }}" type="text"></td>
+<td>TTL:  </td>
+<td ><input class="text_field" class="date-range-picker"  name="nama" type="date"></td>
+<td>Pekerjaan/Sekolah  </td>
+<td colspan="6"><input class="text_field"  name="kerja_sekolah" value="{{ Auth::user()->email }}" type="text"></td>
+</tr>
+
+<tr>
+<td colspan="7"><p align="center"><label> C. DATA PENDIDIKAN DAN WAWASAN </p></label></td></label>
+</tr>
+<tr>
+<td colspan="7">Pendidikan Formal</td>
+</tr>
+<tr>
+
+</tr>
+
+<tr>
+<td>Pendidikan Terakhir  </td>
+<td colspan="6"><input class="text_field"  name="tingkat_pendidikan" value="{{ $data->tingkat_pendidikan}}" type="text"></td>
+</tr><tr>
+<td>Jurusan  </td>
+<td><input class="text_field"  name="jurusan" value="{{ $data->jurusan}}" type="text"></td>
+<td>Nama Sekolah/Universitas  </td>
+<td colspan="6"> <input class="text_field"  name="sekolah" value="{{ $data->sekolah}}" type="text"></td>
+</tr><tr>
+<td>Tahun Masuk  </td>
+<td >{{ $data->th_masuk}}</td>
+<td>Tahun Lulus  </td>
+<td colspan="6"><input class="text_field"  name="th_keluar" value="{{ $data->th_keluar}}" type="text"></td>
+</tr><tr>
+<td >Nilai Terakhir/IPK </td>
+<td colspan="6"></td>
+</tr>
+<tr><td colspan="7">Pendidikan Non </td>
+</tr>
+<td>Jenis Penidikan Non Formal  </td>
+<td colspan="6"><input class="text_field"  name="jenis_pendidikan" value="{{ $data->jenis_pendidikan}}" type="text"></td>
+</tr><tr>
+<td>Penyelengara  </td>
+<td colspan="6"><input class="text_field"  name="penyelengara" value="{{ $data->penyelengara}}" type="text"></td>
+</tr><tr>
+<td>durasi  </td>
+<td colspan="6"><input class="text_field"  name="penyelengara" value="{{ $data->penyelengara}}" type="text"></td>
+</tr><tr>
+<td>tahun  </td>
+<td colspan="6"><input class="text_field"  name="tahun" value="{{ $data->tahun}}" type="text"></td>
+</tr>
+<tr>
+<td colspan="7">Pengalaman Organisasi</td>
+</tr>
+<tr>
+<td>Jenjang </td>
+<td>Nama Organisasi</td>
+<td>kota tinggal Organisasi</td>
+<td>Jabatan</td>
+<td>Tahun Keluar</td>
+
+</tr>
+<tr>
+<td><input class="text_field"  name="jenjang"  type="text"></td>
+<td><input class="text_field"  name="nama_organisasi" type="text"></td>
+<td><input class="text_field"  name="kota_organisasi" type="text"></td>
+<td><input class="text_field"  name="Jabab=tan" 		type="text"></td>
+<td><input class="text_field"  name="Tahun keluar"  type="text"></td>
+<td colspan="6"><input class="text_field"  name="nama" type="text"></td>
+</tr>
+<tr>
+
+<td colspan="7"> Pengalaman Bekerja</td>
+</tr>
+<tr>
+<td rowspan="2">Nama Perusahaan</td>
+<td rowspan="2">Jabatan</td>
+<td colspan="2">Tahun</td>
+<td rowspan="2">Alasan Berhenti</td>
+<td rowspan="2" colspan="6" >Gaji Terakhir</td>
+</tr>
+<tr>
+<td >Tahun Masuk  </td>
+<td >Tahun Keluar</td>
+</tr>
+<tr>
+<td><input class="text_field"  name="nama_perusahaan" value="{{ Auth::user()->email }}" type="text"></td>
+<td><input class="text_field"  name="jabatan" value="{{ Auth::user()->email }}" type="text"></td>
+<td><input class="text_field"  name="tahun" value="{{ Auth::user()->email }}" type="text"></td>
+<td><input class="text_field"  name="alasan_berhenti" value="{{ Auth::user()->email }}" type="text"></td>
+<td><input class="text_field"  name="gaji_terakhir" value="{{ Auth::user()->email }}" type="text"></td>
+<td><input class="text_field"  name="tahun_masuk" value="{{ Auth::user()->email }}" type="text"></td>
+<td colspan="6"><input class="text_field"  name="tahun_keluar" value="{{ Auth::user()->email }}" type="text"></td>
+</tr>
+<tr>
+<td colspan="7"><p align="center">D. DATA  MINAT DAN KONSEP DIRI</p></td>
+</tr>
+<tr>
+<td colspan="7"><input class="text_field"  name="tahun_masuk" value="{{ Auth::user()->email }}" type="text"></td>
+</tr>
+<tr>
+<td colspan="7">
 <input class="submit_btn" type="submit" value="Update">
-</fieldset>
+</td>
+</tr>	@endforeach
+
+	</table>
+</div>
+</div>
+</div>
+</div>
+</div>
 @endforeach
 
 </form>
@@ -341,6 +426,73 @@ Landing page based on Pratt: http://blacktie.co/demo/pratt/
     $('.carousel').carousel({
         interval: 3500
     })
+</script>
+<script>
+  $(function () {
+    //Initialize Select2 Elements
+    $(".select2").select2();
+
+    //Datemask dd/mm/yyyy
+    $("#datemask").inputmask("dd/mm/yyyy", {"placeholder": "dd/mm/yyyy"});
+    //Datemask2 mm/dd/yyyy
+    $("#datemask2").inputmask("mm/dd/yyyy", {"placeholder": "mm/dd/yyyy"});
+    //Money Euro
+    $("[data-mask]").inputmask();
+
+    //Date range picker
+    $('#reservation').daterangepicker();
+    //Date range picker with time picker
+    $('#reservationtime').daterangepicker({timePicker: true, timePickerIncrement: 30, format: 'MM/DD/YYYY h:mm A'});
+    //Date range as a button
+    $('#daterange-btn').daterangepicker(
+        {
+          ranges: {
+            'Today': [moment(), moment()],
+            'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+            'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+            'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+            'This Month': [moment().startOf('month'), moment().endOf('month')],
+            'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+          },
+          startDate: moment().subtract(29, 'days'),
+          endDate: moment()
+        },
+        function (start, end) {
+          $('#daterange-btn span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+        }
+    );
+
+    //Date picker
+    $('#datepicker').datepicker({
+      autoclose: true
+    });
+
+    //iCheck for checkbox and radio inputs
+    $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
+      checkboxClass: 'icheckbox_minimal-blue',
+      radioClass: 'iradio_minimal-blue'
+    });
+    //Red color scheme for iCheck
+    $('input[type="checkbox"].minimal-red, input[type="radio"].minimal-red').iCheck({
+      checkboxClass: 'icheckbox_minimal-red',
+      radioClass: 'iradio_minimal-red'
+    });
+    //Flat red color scheme for iCheck
+    $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
+      checkboxClass: 'icheckbox_flat-green',
+      radioClass: 'iradio_flat-green'
+    });
+
+    //Colorpicker
+    $(".my-colorpicker1").colorpicker();
+    //color picker with addon
+    $(".my-colorpicker2").colorpicker();
+
+    //Timepicker
+    $(".timepicker").timepicker({
+      showInputs: false
+    });
+  });
 </script>
 </body>
 </html>

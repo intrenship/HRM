@@ -116,25 +116,62 @@ Landing page based on Pratt: http://blacktie.co/demo/pratt/
 <div class="main">
 <form action="{{ url('insert_biodata') }}" class="regform" method="POST" align="center">
 			    {!! csrf_field() !!}
-<!-- Progress Bar -->
-<ul id="progressbar">
-<li class="active">Data Pribadi</li>
-<li>Pendidikan</li>
-<li>Ketrampilan</li>
-<li>Pengalaman Bekerja</li>
-<li>Data Orang </li>
-</ul>
-<fieldset id="first">
-<h3 class="title">Input Your Personal Data</h3>
-<p class="subtitle">Step 1</p>
-<input class="text_field"  	name="no_ktp" placeholder="No KTP" type="text" required >
-<input class="text_field"   name="nama" placeholder="Full Name" type="text" require >
-<input class="text_field"   name="alamat" placeholder="Alamat Tinggal" type="text" required >
-<input class="text_field"   name="alamat_ktp" placeholder="Alamat KTP" type="text" required >
-<input class="text_field"   name="email" placeholder="Email"type="text" required >
-<input class="text_field"   name="tinggi" placeholder="Tinggi Badan"type="text" required >
-<input class="text_field"   name="berat" placeholder="Berat Badan"type="text" required >
-<input class="text_field"   name="npwp" placeholder="No NPWP"type="text" required >
+ <div class="row">
+    <div class="content">
+          <div class="box-body">
+                <div class="form-group" >
+				    <div class="col-md-12">
+				
+		<table  align="center">
+	<tr> 
+		<td>
+		<div class="col-lg-8">
+		<img class="img-responsive" src="{{ asset('/img/dios.png') }}">
+		</div>
+		</div>
+		</div>
+		</div>
+</td>
+		<td> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  </td>
+		<td> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  </td>
+		<td> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  </td>
+		<td> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  </td>
+		<td> <h4><b>Digital Oasis <br/> (PT.Pilar Timur Teknologi)</b></h4>Jl.Unpar III No.3 Sukawarna. Bandung <br /> Email : hrd@digitaloasis.co.id <br /> Website : www.digitaloasis.co.id</td>
+	</tr>
+	</table>
+	<br />
+<div class="box-body">
+<table  class="table table-bordered" role="grid" border="3">
+<tr>
+<th colspan="4"> <p align="center">FORM PENERIMAAN <br /> CALON KARYAWAN BARU<p></th>
+<th colspan="7" > <br /> Tanggal : {{date('d-m-Y')}}<br /> Tempat :</th>
+</tr>
+<tr>
+<td colspan="7"><p align="center"> <b>A. DATA  PRIBADI</b> </p>
+</td>
+</tr>
+<tr>
+<td>No.KTP</td>
+<td colspan="6">
+<input class="text_field"  name="no_ktp" value="" type="text">
+</td>
+</tr>
+<tr>
+
+<td>Nama  </td>
+<td colspan="6"><input class="text_field" value=""  name="nama" type="text"></td>
+</tr><tr>
+<td >Email  </td>
+<td colspan="6"><input class="text_field"  name="email" value="{{ Auth::user()->email }}" readonly type="text"></td>
+</tr><tr>
+<td>Alamat  </td>
+<td  colspan="6"><input class="text_field"  name="alamat" value="" type="text"> </td>
+</tr><tr>
+<td>Alamat Sesuai KTP  </td>
+<td colspan="6"><input class="text_field"  name="alamat_ktp" value="" type="text"> </td>
+</tr><tr>
+<td>Agama  </td>
+<td colspan="6">
 <select class="text_field"  name="agama" placeholder="Agama" type="text" required > 
 <option value="">Pilih Agama
 </option>
@@ -143,132 +180,74 @@ Landing page based on Pratt: http://blacktie.co/demo/pratt/
 </option>
 @endforeach
 </select>
-<table>
-<label>Jenis Kelamin</label>
-<tr>
-@foreach($jenis as $data)
-<td><input class="text_field" name="jenis_kelamin"  type="radio" value="{{ $data->jenis_kelamin }}" checked>{{ $data->jenis_kelamin }} &nbsp;</td>
+</td>
+</tr><tr>
+<td>Jenis Kelamin  </td>
 
+<td>@foreach($jenis as $data)
+<input class="text_field" name="jenis_kelamin"  type="radio" value="{{ $data->jenis_kelamin }}" checked>{{ $data->jenis_kelamin }} &nbsp;
 @endforeach
-</tr>
-</table>
-<table>
-<label> Status Pernikahan</label>
+</td>
 
-<tr>
 
+<td>Hobi  </td>
+<td colspan="4"><input class="text_field"  name="hobi" value="" type="text"></td>
+</tr><tr>
+<td>Status Perkawinan </td>
+
+<td>
 @foreach($kawin as $data)
-<td><input class="text_field" name="status_perkawinan"  type="radio" value="{{ $data->status }}" checked>{{ $data->status }} &nbsp;</td>
+<input class="text_field" name="status_perkawinan"  type="radio" value="{{ $data->status }}" checked>{{ $data->status }} &nbsp;
 @endforeach
-</tr>
-</table>
-
-<input class="text_field" name="hobi" placeholder="hobi" type="text" required >
-<input class="text_field"  name="suku" placeholder="suku" type="text" required >
-<input class="text_field"  name="no_tlp" placeholder="no_tlp" type="text" required >
-<input class="text_field"  name="no_hp" placeholder="no_hp" type="text" required >
-<table>
-<tr>
-<label> Kendaraan</label>
-</tr>
-<tr>
-<td><input class="text_field" name="kendaraan" placeholder="" type="checkbox" value="Motor">Motor &nbsp </td>
-<td><input class="text_field" name="kendaraan" placeholder="" type="checkbox" value="Mobil">Mobil</td>
-<tr>
-</table>
-<table>
-<tr>
-<label> Memiliki Surat Izin Mengemudi(SIM)</label>
-</tr>
-<tr>
-<td><input class="text_field" name="sim" placeholder="" type="checkbox" value="A">A &nbsp </td>
-<td><input class="text_field" name="sim" placeholder="" type="checkbox" value="B">B &nbsp </td>
-<td><input class="text_field" name="sim" placeholder="" type="checkbox" value="B1">B1 &nbsp </td>
-<td><input class="text_field" name="sim" placeholder="" type="checkbox" value="B2">B2 &nbsp </td>
-<td><input class="text_field" name="sim" placeholder="" type="checkbox" value="B3">B3 &nbsp </td>
-<td><input class="text_field" name="sim" placeholder="" type="checkbox" value="C">C &nbsp </td>
-<tr>
-</table>
-<input class="text_field"  name="no_sim" placeholder="no_sim" type="text" requiered>
-<input class="next_btn" name="next" type="button" value="Next">
-</fieldset>
-<fieldset>
-<h2 class="title">Educational Profiles</h2>
-<p class="subtitle">Step 2</p>
-<label> Pendidikan Formal </label>
-<select class="text_field" name="tingkat_pendidikan" placeholder="jenis_kelamin" type="text"> 
-<option value="">Pendidikan Terakhir
-</option>
-@foreach($jenjang as $data)
-<option value="{{ $data->jejang }}">{{ $data->jejang }}
-</option>
-@endforeach
-</select>
-<select class="text_field" name="jurusan" placeholder="jenis_kelamin" type="text" required > 
-<option value="">Jurusan
-</option>
-@foreach($jurusan as $data)
-<option value="{{ $data->jurusan }}">{{ $data->jurusan }}
-</option>
-@endforeach
-</select>
-<input class="text_field" id ="sekolah" name="sekolah" placeholder="masukan nama sekolah/universitas" type="text" required >
-<input class="text_field" id ="sekolah" name="kota" placeholder="Kota/Kabupaten" type="text" required >
-<input class="text_field"  id ="sekolah"  name="th_masuk" placeholder="Tahun masuk" type="text" required >
-<input class="text_field"  id ="sekolah"  name="th_keluar" placeholder="Tahun keluar" type="text" required >
-<label> Pengalaman Organisasi </label>
-<input class="text_field" id ="sekolah"  name="jenis" placeholder="Jenis Organisasi" type="text" >
-<input class="text_field"  id ="sekolah"  name="nama_organisasi" placeholder="Nama Organisasi" type="text">
-<input class="text_field" id ="sekolah"  name="kota" placeholder="Kota/kabupaten" type="text">
-<input class="text_field" id ="sekolah"  name="posisi" placeholder="Posisi" type="text">
-<input class="text_field" id ="sekolah"  name="tahun" placeholder="Tahun" type="text">
-<input class="pre_btn" name="previous" type="button" value="Previous">
-<input class="next_btn" name="next" type="button" value="Next">
-</fieldset>
-<fieldset>
-<h3 class="title">Skills Mastered</h3>
-<p class="subtitle">Step 3</p>
-<label> Keterampilan </label>
-<input class="text_field"   name="jenis" placeholder="Jenis Ketrampilan" type="text" required >
-<table>
-<p>Tingkat Penguasaan</p>
-<tr>
-<td>
-<input class="text_field"   name="Tingkat" type="radio" value="Baik">Baik &nbsp;
-<input class="text_field"   name="Tingkat" type="radio" value="Cukup" checked>Cukup &nbsp;
-<input class="text_field"   name="Tingkat" type="radio" value="Kurang">Kurang &nbsp;
 </td>
-</table><input class="pre_btn" type="button" value="Previous">
-<input class="next_btn" name="next" type="button" value="Next">
 
-<!--<input class="submit_btn" type="submit" value="Submit">-->
-</fieldset>
-<fieldset>
-<h2 class="title">Jobs Experience</h2>
-<p class="subtitle">Step 4</p>
-<label> Pengalaman Kerja Terbaru </label>
-<input class="text_field"   name="jenis" placeholder="Jenis Ketrampilan" type="text" required >
-<table><tr>
-<td>
-<input class="text_field"  placeholder="nama_perusahaan"  name="nama_perusahaan" type="text" required >
-<input class="text_field"  placeholder="jabatan" name="jabatan" type="text" required  >
-<input class="text_field"  placeholder="Tahun Masuk" name="th_masuk" type="text" required >
-<input class="text_field"  placeholder="Tahun Keluar" name="th_keluar" type="text" required  >
+<td>Tinggi  </td>
+<td colspan="2"><input class="text_field"  name="tinggi" value="" type="text"></td>
+<td>Berat Badan  </td>
+<td ><input class="text_field"  name="berat" value="" type="text"></td>
+</tr><tr>
+<tr>
+<td>NPWP  </td>
+<td colspan="6"><input class="text_field"  name="npwp" value="" type="text"></td>
+</tr>
+<tr>
+<tr>
+<td>Kendaraan  </td>
+<td colspan="6"><input class="text_field"  name="kendaraan" value="" type="text"></td>
+</tr>
+<tr>
+<td>Sim  </td>
+<td >
+<input class="text_field" name="sim" placeholder="" type="checkbox" value="A">A &nbsp 
+<input class="text_field" name="sim" placeholder="" type="checkbox" value="B1">B1 &nbsp 
+<input class="text_field" name="sim" placeholder="" type="checkbox" value="B2">B2 &nbsp 
+<input class="text_field" name="sim" placeholder="" type="checkbox" value="c">C &nbsp 
+
 </td>
-</table><input class="pre_btn" type="button" value="Previous">
-<input class="next_btn" name="next" type="button" value="Next">
-</fieldset>
-<fieldset>
-<h2 class="title">Data Parent</h2>
-<p class="subtitle">Step 5</p>
-<input class="text_field" name="nama_ibu" placeholder="Masukan Nama Ibu" type="text" required >
-<input class="text_field" name="alamat_ortu" placeholder="Alamat ibu" type="text" requiered>
-<input class="form-control pull-right text_field" id="datepicker" name="tggl_lahir" placeholder="Tanggal Lahir Ibu" type="text" required >
-<input class="text_field" name="pekerjaan" placeholder="Pekerjaan" type="text" required >
+<td>No SIM  </td>
+<td colspan="4F"><input class="text_field"  name="no_sim" value="" type="text"></td>
+</tr>
+<td>Suku  </td>
+<td colspan="6"><input class="text_field"  name="suku" value="" type="text"></td>
+</tr><tr>
+<td>No.Telp  </td>
+<td ><input class="text_field"  name="no_tlp" value="" type="text"></td>
+<td>No.Hp  </td>
+<td colspan="4"><input class="text_field"  name="no_hp" value="" type="text"> </td>
+</tr><tr>
+<td>No.SIM  </td>
+<td colspan="6"><input class="text_field"  name="no_sim" value="" type="text"></td>
+</tr>
+<tr>
+<td colspan="7">
 <input class="text_field" name="id_user"  type="hidden" value="{{ Auth::user()->id }}">
-<input class="pre_btn" type="button" value="Previous">
-<input class="submit_btn" type="submit" value="Submit">
-</fieldset>
+<input class="submit_btn" type="submit" value="Next">
+<td>
+</tr>
+	</table>
+	
+	
+
 </form>
 </div>
 </div>
@@ -277,7 +256,7 @@ Landing page based on Pratt: http://blacktie.co/demo/pratt/
     </section>
             
               <!-- /. tools -->
-            <!-- /.box-header -->
+            <!-- /.box-header-->
 
 <section id="contact" name="contact"></section>
 <div id="footerwrap">
