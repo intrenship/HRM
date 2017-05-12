@@ -10,7 +10,7 @@ class formal extends Model
 	protected $primarykey = 'id';
 	protected $fillable = ['tingkat_pendidikan', 
 	'jurusan','sekolah',
-	'th_masuk','th_keluar','id_user'];
+	'th_masuk','th_keluar','IPK','id_user'];
 	public $timestamps = false;
 }
 

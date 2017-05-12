@@ -18,6 +18,7 @@ use App\biodata;
 use App\lamaran;
 use App\formal;
 use App\non_formal;
+use App\saudara;
 use App\organisasi;
 use App\ortu;
 use Mail;
@@ -79,6 +80,22 @@ class adminController extends Controller
 		$datas = crud_admin::orderBy('id','DESC')->paginate(10);
 		return view('/superadmin/news_view')->with('datas', $datas);
     }
+		public function biodata1()
+    {
+		return view('/user/biodata1');
+    }
+	public function biodata2()
+    {
+		return view('/user/biodata2');
+    }
+	public function biodata3()
+    {
+		return view('/user/biodata3');
+    }
+	public function biodata4()
+    {
+		return view('/user/biodata4');
+    }
 
 	public function insert_news(Request $request)
     {
@@ -106,6 +123,12 @@ class adminController extends Controller
 	
 	public function insert_lamaran(Request $request)
     { 
+	    $this->validate($request,[
+        'id_user' => 'required',
+        'id_lowongan'=>'required',
+        'status'=>'required',
+        'file_cv'=>'required|pdf'
+    ]);
 	
      $tambah = new crud_lamaran();
      $tambah->id_user = $request['id_user'];
@@ -114,7 +137,9 @@ class adminController extends Controller
 // Disini proses mendapatkan judul dan memindahkan letak gambar ke folder image
         $file       = $request->file('file_cv');
         $fileName   = $file->getClientOriginalName();
+		$file 		= Storage::getVisibility('file.jpg'); 
         $request->file('file_cv')->move("cv/", $fileName);
+
 
         $tambah->file_cv = $fileName;
      $tambah->save();
@@ -204,10 +229,10 @@ class adminController extends Controller
 	$users = biodata::where('id_user',$id)->first();
 		if (count($users)){		
 		  $datas1 = DB::table('users')
-            ->join('pendidikan_formal', 'users.id', '=', 'pendidikan_formal.id_user')
-            ->join('pendidikan_nonformal', 'users.id', '=', 'pendidikan_nonformal.id_user')
-            ->join('orang_tua', 'users.id', '=', 'orang_tua.id_user')
-            ->join('biodata', 'users.id', '=', 'biodata.id_user')
+            ->leftJoin('pendidikan_formal', 'users.id', '=', 'pendidikan_formal.id_user')
+            ->leftJoin('pendidikan_nonformal', 'users.id', '=', 'pendidikan_nonformal.id_user')
+            ->leftJoin('orang_tua', 'users.id', '=', 'orang_tua.id_user')
+            ->leftJoin('biodata', 'users.id', '=', 'biodata.id_user')
             ->select('users.*', 'pendidikan_formal.*', 'pendidikan_nonformal.*','orang_tua.*','biodata.*')
             ->get();
 
@@ -246,6 +271,7 @@ class adminController extends Controller
             ->leftJoin('biodata', 'users.id', '=', 'biodata.id_user')
             ->select('users.*', 'pendidikan_formal.*', 'pendidikan_nonformal.*','orang_tua.*','biodata.*')
 			->where('biodata.id_user','=',$id)
+			->where('orang_tua.id_user','=',$id)
             ->get();
 		return view('/user/editbio')->with('users',$users)->with('datas',$datas);
     }	
@@ -413,41 +439,95 @@ public function insert_biodata(Request $request)
      $tambah->no_sim = $request['no_sim'];
 	 $tambah->id_user = $request['id_user'];
 
-	 $tambah1 = new formal();
-	 $tambah1->tingkat_pendidikan = $request['tingkat_pendidikan'];
-	 $tambah1->jurusan = $request['jurusan'];
-     $tambah1->sekolah = $request['sekolah'];
-     $tambah1->th_masuk = $request['th_masuk'];
-     $tambah1->kota = $request['kota'];
-	 $tambah1->th_keluar = $request['th_keluar'];
+	
+    
+	 
+     $tambah->save();
+    
+	      return redirect()->to('biodata1');
+
+	}
+	
+	public function insert_biodata1(Request $request)
+    {
+        //
+		 $tambah1 = new ortu();
+		 
+	 $tambah1->anak_ke = $request['anak_ke'];
+	 $tambah1->nama_ibu = $request['nama_ibu'];
+     $tambah1->saudara = $request['saudara'];
+     $tambah1->saudara_i = $request['saudara_i'];
+     $tambah1->nama_ayah = $request['nama_ayah'];
+     $tambah1->pekerjaan_ayah = $request['pekerjaan_ayah'];
+     $tambah1->tgl_lahir_ayah = $request['tgl_lahir_ayah'];
+     $tambah1->tgl_lahir_ibu = $request['tgl_lahir_ibu'];
      $tambah1->id_user = $request['id_user'];
+
+	$tambah2 = new saudara();
+	$tambah2->saudara_i = $request['saudara_i'];
+	$tambah2->tgl_lahir = $request['tgl_lahir'];
+	$tambah2->pekerjaan = $request['pekerjaan'];
+	$tambah2->id_user = $request['id_user'];
      
+	 
+     $tambah1->save();
+     $tambah2->save();
+	      return redirect()->to('biodata2');
+
+	}
+	
+	
+	public function insert_biodata2(Request $request)
+    {
+        //
+	
 	 $tambah2 = new non_formal();
 	 $tambah2->jenis_pendidikan = $request['jenis_pendidikan'];
 	 $tambah2->penyelengara = $request['penyelengara'];
      $tambah2->tahun = $request['tahun'];
      $tambah2->id_user = $request['id_user']; 
 	 
-	 $tambah3 = new ortu();
-	 $tambah3->nama_ibu = $request['nama_ibu'];
-     $tambah3->alamat_ortu = $request['alamat_ortu'];
-     $tambah3->pekerjaan = $request['pekerjaan'];
-     $tambah3->alamat_ortu = $request['alamat_ortu'];
+	 $tambah3 = new formal();
+	 
+	 $tambah3->tingkat_pendidikan = $request['tingkat_pendidikan'];
+	 $tambah3->jurusan = $request['jurusan'];
+     $tambah3->sekolah = $request['sekolah'];
+     $tambah3->th_masuk = $request['th_masuk'];
+	 $tambah3->th_keluar = $request['th_keluar'];
      $tambah3->id_user = $request['id_user'];
 	 
 	 $tambah4 = new organisasi();
-	 $tambah3->jenis = $request['jenis'];
-     $tambah3->nama_organisasi = $request['nama_organisasi'];
-     $tambah3->posisi = $request['posisi'];
-     $tambah3->tahun = $request['tahun'];
-     $tambah3->id_user = $request['id_user'];
+	 $tambah4->jenis = $request['jenis'];
+     $tambah4->nama_organisasi = $request['nama_organisasi'];
+     $tambah4->posisi = $request['posisi'];
+     $tambah4->tahun = $request['tahun'];
+     $tambah4->id_user = $request['id_user'];
 
-    
-	 
-     $tambah->save();
-     $tambah1->save();
-     $tambah2->save();
+     $tambah4->save();
      $tambah3->save();
+     $tambah2->save();
+	      return redirect()->to('biodata3');
+
+	}
+	public function insert_biodata3(Request $request)
+    {
+        //
+	
+
+	      return redirect()->to('/user/biodata4');
+
+	}
+	public function insert_biodata4(Request $request)
+    {
+        //
+	 
+	 $tambah4 = new organisasi();
+	 $tambah4->jenis = $request['jenis'];
+     $tambah4->nama_organisasi = $request['nama_organisasi'];
+     $tambah4->posisi = $request['posisi'];
+     $tambah4->tahun = $request['tahun'];
+     $tambah4->id_user = $request['id_user'];
+
      $tambah4->save();
 	      return redirect()->to('/user/user_home');
 

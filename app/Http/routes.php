@@ -32,6 +32,10 @@ Route::group(['middleware' => ['web','auth']], function(){
 
 	//users
 	Route::get('/add_users', 'adminController@create_users');
+	Route::get('/biodata1', 'adminController@biodata1');
+	Route::get('/biodata2', 'adminController@biodata2');
+	Route::get('/biodata3', 'adminController@biodata3');
+	Route::get('/biodata4', 'adminController@biodata4');
 	Route::get('/test', 'userController@biodata');
 	Route::get('/add_biodata/{id}', 'adminController@biodata');
 	Route::get('/edit_biodata/{id}', 'adminController@editbiodata');
@@ -44,6 +48,9 @@ Route::group(['middleware' => ['web','auth']], function(){
 	Route::post('/users_insert', 'adminController@register1');
 	Route::get('/delete_user/{id}', 'adminController@destroy_user');
 	Route::post('/insert_biodata', 'adminController@insert_biodata');
+	Route::post('/insert_biodata1', 'adminController@insert_biodata1');
+	Route::post('/insert_biodata2', 'adminController@insert_biodata2');
+	Route::post('/insert_biodata3', 'adminController@insert_biodata3');
 	
 	Route::post('/lamaran', 'adminController@insert_lamaran');
 	Route::post('/lamaran1', 'adminController@insert_lamaran1');
