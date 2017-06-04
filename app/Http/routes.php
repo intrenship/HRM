@@ -39,11 +39,12 @@ Route::group(['middleware' => ['web','auth']], function(){
 	Route::get('/test', 'userController@biodata');
 	Route::get('/add_biodata/{id}', 'adminController@biodata');
 	Route::get('/edit_biodata/{id}', 'adminController@editbiodata');
+	Route::get('/edit_lamaran/{id}', 'adminController@edit_lamaran');
 	Route::post('/update_biodata/{id_user}', 'adminController@updatebiodata');
 	Route::post('/lamaran_kerja/', 'adminController@lamaran');
 	Route::get('/view_users', 'adminController@views_users');
 	Route::get('/edit_users/{id}', 'adminController@edit_users');
-	Route::post('/update_userens/{id}', 'adminController@update_users');
+	Route::post('/update_users/{id}', 'adminController@update_users');
 	Route::get('/query_users', 'adminController@search_user');
 	Route::post('/users_insert', 'adminController@register1');
 	Route::get('/delete_user/{id}', 'adminController@destroy_user');
@@ -53,6 +54,7 @@ Route::group(['middleware' => ['web','auth']], function(){
 	Route::post('/insert_biodata3', 'adminController@insert_biodata3');
 	
 	Route::post('/lamaran', 'adminController@insert_lamaran');
+	Route::get('/kirim_email/{id}', 'MailController@html_email');
 	Route::post('/lamaran1', 'adminController@insert_lamaran1');
 	Route::get('/lamaran3', 'adminController@lamaran_view');
 
@@ -68,7 +70,9 @@ Route::group(['middleware' => ['web','auth']], function(){
 	Route::get('/search_lowongan/{id}', 'adminController@cari_lowongan');
 	Route::get('/search_lowongan1/', 'adminController@cari_lowongan1');
 	//biodata//
-
+Route::get('sendbasicemail','MailController@postmakeInsuranceClaim') ;
+Route::get('sendhtmlemail','MailController@html_email') ;
+Route::get('sendattachmentemail','MailController@attachment_email') ;
 	
 	Route::get('/login1', function(){
 		if (Auth::user()->id_group == 1){
