@@ -54,6 +54,18 @@
                     <li><a href="{{ url('view_jobs') }}">View Job Vacancy</a></li>
                 </ul>
             </li>
+			<li class="treeview">
+                <a href="#"><i class="fa fa-fw fa-sitemap"></i> <span>Manage the application</span> <i class="fa fa-angle-left pull-right"></i></a>
+                <ul class="treeview-menu">
+					<li><a href="{{ url('lamaran3') }}">Application</a></li>
+                </ul>
+            </li>
+			<li class="treeview">
+                <a href="#"><i class="fa fa-fw fa-sticky-note-o"></i> <span>KPI For Salary Increase</span> <i class="fa fa-angle-left pull-right"></i></a>
+                <ul class="treeview-menu">
+					<li><a href="{{ url('lamaran3') }}">Lamaran</a></li>
+                </ul>
+            </li>
         </ul><!-- /.sidebar-menu -->
     </section>
     <!-- /.sidebar -->
