@@ -8,8 +8,17 @@ class ortu extends Model
 {
 	protected $table = 'orang_tua';
 	protected $primarykey = 'id';
-	protected $fillable = ['anak_ke','nama_ibu', 'saudara_ke','saudara_i',
-	'pekerjaan_saudara','pekerjaan','nama_ayah','pekerjaan_ayah',
-	'tgl_lahir_ayah','tgl_lahir_ibu','tgl_saudara','id_user'];
+	protected $fillable = [
+	'anak_ke'=>'array',
+	'nama_ibu'=>'array', 
+	'saudara_ke'=>'array',
+	'saudara_i'=>'array',
+	'pekerjaan_saudara'=>'array',
+	'pekerjaan','nama_ayah'=>'array',
+	'pekerjaan_ayah'=>'array',
+	'tgl_lahir_ayah'=>'array',
+	'tgl_lahir_ibu'=>'array',
+	'tgl_saudara'=>'array',
+	'id_user'];
 	public $timestamps = false;
 }

@@ -4,11 +4,12 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 
 
-class lamaran extends Model
+class jobs extends Model
 {
-	protected $table = 'lamaran';
+	protected $table = 'lowongan';
 	protected $primarykey = 'id';
-	protected $fillable = ['id_user', 'id_lowongan', 'status','email'];
+	protected $fillable = ['lowongan', 'kualifikasi','katagori'];
 	public $timestamps = false;
+
 }
 
